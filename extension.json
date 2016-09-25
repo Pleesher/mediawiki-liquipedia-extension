@@ -1,0 +1,45 @@
+{
+	"name": "LiquiGoals",
+	"version": "1.0",
+	"author": [
+		"Jérémy Touati"
+	],
+	"url": "http://wiki.teamliquid.net/",
+	"descriptionmsg": "Game-like achievements for Liquipedia",
+	"license-name": "MIT",
+	"requires": {
+		"MediaWiki": ">= 1.25.0",
+		"Pleesher": ">= 0.9"
+	},
+	
+	"config": {
+		"LiquiGoalsMinEditLength": 10
+	},
+	
+	"callback": "LiquiGoals::initialize",
+	
+	"MessagesDirs": {
+		"LiquiGoals": [
+			"i18n"
+		]
+	},
+	
+	"AutoloadClasses": {
+		"LiquiGoals": "LiquiGoals.php",
+		"LiquiGoals_PleesherImplementation": "PleesherImplementation.php",
+		"LiquiGoals_QueryHelper": "QueryHelper.php",
+		"LiquiGoals_ProfessionListPage": "pages/ProfessionListPage.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"LiquiGoals::initializeParser"
+		],
+		"BeforePageDisplay": [
+			"LiquiGoals::beforePageDisplay"
+		]
+	},
+	"SpecialPages": {
+		"Professions": "LiquiGoals_ProfessionListPage"
+	},
+	"manifest_version": 1
+}

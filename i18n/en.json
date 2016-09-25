@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jérémy Touati"
+		]
+	},
+	"professions": "Professions",
+	
+	"liquigoals.goal.associated_professions.title": "Associated professions",
+	
+	"liquigoals.profession.levels.title": "Levels"
+}

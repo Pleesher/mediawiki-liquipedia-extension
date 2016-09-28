@@ -84,6 +84,6 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		return $query->fetchColumn(0);
+		return $query->fetchColumn(0) ?: 0;
 	}
 }

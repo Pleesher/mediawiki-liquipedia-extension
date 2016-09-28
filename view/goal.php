@@ -14,7 +14,7 @@
 	<?php echo htmlspecialchars($goal->short_description) ?>
 
 	<?php if (count($goal->professions) > 0): ?>
-	<h2><?php echo $h->text('goal.associated_professions.title') ?></h2>
+	<h2><?php echo $h->text('liquigoals.goal.associated_professions.title') ?></h2>
 	<ul>
 		<?php foreach ($goal->professions as $profession_key => $profession): ?>
 		<li><a href="<?php echo $h->pageUrl('Special:Professions') ?>#profession-<?php echo $profession_key ?>"><?php echo $profession->title ?></a></li>

@@ -22,7 +22,7 @@
 	</ul>
 	<?php endif ?>
 
-	<?php if ($goal->achieved && in_array('revoke', $actions)): ?>
-	<a data-redirect="/" href="/api.php?action=liquigoals.revoke_achievement&user_id=<?php echo $user->getId() ?>&goal_id=<?php echo $goal->id ?>">Revoke</a>
+	<?php if (!empty($goal->achieved) && in_array('revoke', $actions)): ?>
+	<a data-redirect="self" href="/api.php?action=liquigoals.revoke_achievement&user_id=<?php echo $user->getId() ?>&goal_id=<?php echo $goal->id ?>">Revoke</a>
 	<?php endif ?>
 </article>

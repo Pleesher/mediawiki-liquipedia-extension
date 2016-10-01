@@ -34,7 +34,10 @@ class LiquiGoals
 		if (isset($GLOBALS['wgUser']))
 		{
 			if ($out->getTitle()->getText() == 'RecheckAllMyAchievements')
+			{
+				PleesherExtension::$pleesher->revoke($GLOBALS['wgUser']->getId(), array_keys(PleesherExtension::$goal_data));
 				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getId());
+			}
 			else if ($out->getTitle()->getText() == 'RecheckAllUserAchievements')
 			{
 				foreach (PleesherExtension::getUsers() as $user)

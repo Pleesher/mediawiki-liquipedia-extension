@@ -23,6 +23,8 @@ class LiquiGoals_PleesherImplementation extends PleesherImplementation
 
 	public function fillGoal($goal)
 	{
+		$goal = parent::fillGoal($goal);
+
 		if (isset(PleesherExtension::$goal_data[$goal->code]->professions))
 		{
 			$goal->professions = array_filter(LiquiGoals::$professions, function($profession_key) use($goal) {

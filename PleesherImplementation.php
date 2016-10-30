@@ -42,6 +42,9 @@ class LiquiGoals_PleesherImplementation extends PleesherImplementation
 		$user_professions = array_map(function($user_profession) use($user) {
 			$user_profession->level = LiquiGoals::getUserLevelForProfession($user, $user_profession->key);
 			$user_profession->kudos = LiquiGoals::getUserKudosForProfession($user, $user_profession->key);
+			$user_profession->kudos_needed_for_next_level = isset($user_profession->levels_kudos[$user_profession->level])
+				? $user_profession->levels_kudos[$user_profession->level]
+				: $user_profession->kudos;
 			return $user_profession;
 		}, LiquiGoals::$professions);
 

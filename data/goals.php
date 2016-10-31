@@ -28,6 +28,11 @@ return [
 			return [$context['query_helper']->getUserEditCount($user_id), 10];
 		}
 	],
+	'necromancer' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getMaxBumpDays($user_id), 364];
+		}
+	],
 	'beginner_biographer' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return [$context['query_helper']->getUserEditCount($user_id, ['category_title' => 'Players']), 10];

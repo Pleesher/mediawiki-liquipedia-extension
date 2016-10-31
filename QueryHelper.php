@@ -83,7 +83,39 @@ class LiquiGoals_QueryHelper
 		$query->execute(array_merge($params, [
 			':user_id' => $user_id
 		]));
+		return $query->fetchColumn(0) ?: 0;
+	}
 
+	public function getMaxBumpDays($user_id, array $filters = [])
+	{
+		$joins  = [];
+		$wheres = [];
+		$params = [];
+
+		if (isset($filters['category_title']))
+		{
+			$joins[]  = 'categorylinks cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
+			$wheres[] = 'cl.cl_to = :category_title';
+			$params[':category_title'] = $filters['category_title'];
+		}
+
+		$sql = '
+			SELECT MAX(DATEDIFF(STR_TO_DATE(r.rev_timestamp, \'%Y%m%d%H%i%s\'), STR_TO_DATE(pr.rev_timestamp, \'%Y%m%d%H%i%s\'))) AS max_bump_days
+			FROM revision r
+			JOIN revision pr ON r.rev_parent_id = pr.rev_id';
+		if (count($joins) > 0)
+			$sql .= ' JOIN ' . join(' JOIN ', $joins);
+		$sql .= '
+			WHERE r.rev_user = :user_id';
+		if (count($wheres) > 0)
+			$sql .= ' AND ' . join(' AND ', $wheres);
+		$sql .= '
+			GROUP BY r.rev_user';
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute(array_merge($params, [
+			':user_id' => $user_id
+		]));
 		return $query->fetchColumn(0) ?: 0;
 	}
 }

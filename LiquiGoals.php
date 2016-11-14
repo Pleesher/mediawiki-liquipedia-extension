@@ -29,6 +29,7 @@ class LiquiGoals
 
 	public static function beforePageDisplay(OutputPage &$out, Skin &$skin)
 	{
+		$out->addModuleStyles( 'ext.liquigoals' );
 		// TODO: remove all the code below (temporary)
 
 		if (isset($GLOBALS['wgUser']))

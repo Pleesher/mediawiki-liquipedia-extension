@@ -5,7 +5,7 @@
 		"Jérémy Touati"
 	],
 	"url": "http://wiki.teamliquid.net/",
-	"descriptionmsg": "Game-like achievements for Liquipedia",
+	"descriptionmsg": "liquigoals-desc",
 	"license-name": "MIT",
 	"requires": {
 		"MediaWiki": ">= 1.25.0",

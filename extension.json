@@ -41,5 +41,17 @@
 	"SpecialPages": {
 		"Professions": "LiquiGoals_ProfessionListPage"
 	},
+	"ResourceModules": {
+		"ext.liquigoals": {
+			"styles": [
+				"styles.less"
+			],
+			"position": "top"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "LiquiGoals/resources"
+	},
 	"manifest_version": 1
 }

@@ -1,0 +1,122 @@
+@pleesher-border-radius:20px;
+@pleesher-achievement-bar-bg-earned:#d9e8f3;
+@pleesher-achievement-bar-bg-unearned:#e4e4e4;
+@pleesher-progress-front:#2d5f93;
+@pleesher-progress-back:#969696;
+@pleesher-showcase-bg:#d9e8f3;
+@pleesher-showcase-hover-bg:#e4e4e4;
+@pleesher-ranking-hover-bg:#d9e8f3;
+@pleesher-completion-date-color:#7f7f7f;
+@pleesher-heading-color:#696969;
+
+.pleesher-goal {
+	border-radius:@pleesher-border-radius;
+	padding:0 15px;
+	margin-bottom:15px;
+	&.pleesher-goal-earned {
+		background-color:@pleesher-achievement-bar-bg-earned;
+	}
+	&.pleesher-goal-unearned {
+		background-color:@pleesher-achievement-bar-bg-unearned;
+	}
+	.pleesher-table {
+		display:table;
+		width:100%;
+		> .pleesher-row {
+			display:table-row;
+			> .pleesher-cell {
+				display:table-cell;
+				vertical-align:top;
+				&.pleesher-cell-logo {
+					width:100px;
+				}
+				&.pleesher-cell-kudos {
+					width:100px;
+				}
+			}
+		}
+	}
+	.pleesher-liquipedia-logo {
+		background-image:url(./gfx/lp_logo.png);
+		width:75px;
+		height:75px;
+		background-position:center center;
+		background-repeat:no-repeat;
+		margin-right:5px;
+	}
+	.pleesher-checkmark {
+		background-image:url(./gfx/checkmark.png);
+		width:13px;
+		height:13px;
+		background-position:center center;
+		background-repeat:no-repeat;
+		display:inline-block;
+		margin-left:5px;
+	}
+	.pleesher-achievement {
+		.pleesher-achievement-title {
+			font-size:1.5em;
+			font-weight:bold;
+		}
+		.pleesher-achievement-description {
+		}
+		.pleesher-achievement-progress {
+			line-height:18px;
+			.pleesher-progress {
+				vertical-align:middle;
+				display:inline-block;
+				width:500px;
+				max-width:100%;
+				height:18px;
+				background-color:@pleesher-progress-back;
+				overflow:hidden;
+				margin-right:5px;
+				@media(max-width:700px) {
+					width:100%;
+				}
+				.pleesher-progress-inner {
+					max-width:100%;
+					height:18px;
+					background-color:@pleesher-progress-front;
+				}
+			}
+			.pleesher-progress-text {
+				white-space:nowrap;
+				display:inline-block;
+			}
+		}
+		.pleesher-achievement-revoke {
+		}
+		.pleesher-achievement-date {
+			font-style:italic;
+			color:@pleesher-completion-date-color;
+		}
+	}
+	.pleesher-kudos {
+		float:right;
+		text-align:center;
+		line-height:1;
+		margin-top:10px;
+		> .pleesher-kudos-big {
+			font-size:2.5em;
+		}
+		> .pleesher-kudos-small {
+			font-size:1.1em;
+			text-transform:uppercase;
+		}
+	}
+	.pleesher-heading {
+		color:@pleesher-heading-color;
+	}
+}
+.liquigoalsTable {
+	width:100%;
+	> thead > tr > th {
+		color:@pleesher-heading-color;
+		font-size:85%;
+		text-align:left;
+	}
+	> tbody > tr:hover {
+		background-color:@pleesher-ranking-hover-bg;
+	}
+}

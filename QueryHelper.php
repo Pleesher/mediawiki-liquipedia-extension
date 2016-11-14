@@ -10,13 +10,14 @@ class LiquiGoals_QueryHelper
 
 	public function getUserEditCount($user_id, array $filters = [])
 	{
+		global $wgDBprefix;
 		$joins  = [];
 		$wheres = [];
 		$params = [];
 
 		if (isset($filters['category_title']))
 		{
-			$joins[]  = 'categorylinks cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
+			$joins[]  = (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'categorylinks cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
 			$wheres[] = 'cl.cl_to = :category_title';
 			$params[':category_title'] = $filters['category_title'];
 		}
@@ -29,10 +30,10 @@ class LiquiGoals_QueryHelper
 
 		$sql = '
 			SELECT LENGTH(t.old_text) AS new_text_length, LENGTH(pt.old_text) AS old_text_length
-			FROM revision r
-			JOIN text t ON r.rev_text_id = t.old_id
-			JOIN revision pr ON r.rev_parent_id = pr.rev_id
-			JOIN text pt ON pr.rev_text_id = pt.old_id';
+			FROM ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'revision r
+			JOIN ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'text t ON r.rev_text_id = t.old_id
+			JOIN ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'revision pr ON r.rev_parent_id = pr.rev_id
+			JOIN ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'text pt ON pr.rev_text_id = pt.old_id';
 		if (count($joins) > 0)
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
@@ -53,23 +54,24 @@ class LiquiGoals_QueryHelper
 
 	public function getMaxUserEditLength($user_id, array $filters = [])
 	{
+		global $wgDBprefix;
 		$joins  = [];
 		$wheres = [];
 		$params = [];
 
 		if (isset($filters['category_title']))
 		{
-			$joins[]  = 'categorylinks cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
+			$joins[]  = (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'categorylinks cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
 			$wheres[] = 'cl.cl_to = :category_title';
 			$params[':category_title'] = $filters['category_title'];
 		}
 
 		$sql = '
 			SELECT MAX(LENGTH(t.old_text) - LENGTH(pt.old_text)) AS max_edit_length
-			FROM revision r
-			JOIN text t ON r.rev_text_id = t.old_id
-			JOIN revision pr ON r.rev_parent_id = pr.rev_id
-			JOIN text pt ON pr.rev_text_id = pt.old_id';
+			FROM ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'revision r
+			JOIN ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'text t ON r.rev_text_id = t.old_id
+			JOIN ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'revision pr ON r.rev_parent_id = pr.rev_id
+			JOIN ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'text pt ON pr.rev_text_id = pt.old_id';
 		if (count($joins) > 0)
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
@@ -88,21 +90,22 @@ class LiquiGoals_QueryHelper
 
 	public function getMaxBumpDays($user_id, array $filters = [])
 	{
+		global $wgDBprefix;
 		$joins  = [];
 		$wheres = [];
 		$params = [];
 
 		if (isset($filters['category_title']))
 		{
-			$joins[]  = 'categorylinks cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
+			$joins[]  = (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'categorylinks cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
 			$wheres[] = 'cl.cl_to = :category_title';
 			$params[':category_title'] = $filters['category_title'];
 		}
 
 		$sql = '
 			SELECT MAX(DATEDIFF(STR_TO_DATE(r.rev_timestamp, \'%Y%m%d%H%i%s\'), STR_TO_DATE(pr.rev_timestamp, \'%Y%m%d%H%i%s\'))) AS max_bump_days
-			FROM revision r
-			JOIN revision pr ON r.rev_parent_id = pr.rev_id';
+			FROM ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'revision r
+			JOIN ' . (isset($wgDBprefix) && $wgDBprefix != '' ? $wgDBprefix : '') . 'revision pr ON r.rev_parent_id = pr.rev_id';
 		if (count($joins) > 0)
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '

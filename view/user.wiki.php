@@ -12,8 +12,42 @@
 		--><div class="pleesher-progress-inner" style="width:<?php echo (min($achievement_count, $goal_count) / $goal_count * 100); ?>%;"></div><!--
 		--><span class="pleesher-progress-text-fixed-left">Achievements Completed</span><!--
 		--><span class="pleesher-progress-text-fixed-right"><?php echo min($achievement_count, $goal_count) . '/' . $goal_count; ?></span><!--
-	--></div><!--
-	<div class="pleesher-liquigoals-title">Achievement Showcase</div>-->
+	--></div>
+	<div class="pleesher-liquigoals-title">Achievement Showcase</div>
+	<div class="pleesher-showcase">
+		<div class="pleesher-showcase-item">
+			<div class="pleesher-showcase-item-icon"></div>
+			<div class="pleesher-showcase-item-name">Send me pizza</div>
+		</div>
+		<div class="pleesher-showcase-item">
+			<div class="pleesher-showcase-item-icon"></div>
+			<div class="pleesher-showcase-item-name">Send me pizza</div>
+		</div>
+		<div class="pleesher-showcase-item">
+			<div class="pleesher-showcase-item-icon"></div>
+			<div class="pleesher-showcase-item-name">Send me pizza</div>
+		</div>
+		<div class="pleesher-showcase-item">
+			<div class="pleesher-showcase-item-icon"></div>
+			<div class="pleesher-showcase-item-name">Send me pizza</div>
+		</div>
+		<div class="pleesher-showcase-item">
+			<div class="pleesher-showcase-item-icon"></div>
+			<div class="pleesher-showcase-item-name">Send me pizza</div>
+		</div>
+		<div class="pleesher-showcase-item">
+			<div class="pleesher-showcase-item-icon"></div>
+			<div class="pleesher-showcase-item-name">Send me pizza</div>
+		</div>
+		<div class="pleesher-showcase-item">
+			<div class="pleesher-showcase-item-icon"></div>
+			<div class="pleesher-showcase-item-name">Send me even more pizza</div>
+		</div>
+		<div class="pleesher-showcase-item">
+			<div class="pleesher-showcase-item-icon"></div>
+			<div class="pleesher-showcase-item-name">Send me even more pizza, i'm still hungry</div>
+		</div>
+	</div>
 	<?php if (count($user_professions) > 0): ?>
 		<div class="pleesher-liquigoals-title">Professions</div>
 		<div class="pleesher-professions">

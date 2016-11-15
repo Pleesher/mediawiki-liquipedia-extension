@@ -38,4 +38,8 @@
 			<Goal code="<?php echo $goal->code ?>" perspective="<?php echo $user->getName() ?>" />
 		<?php endforeach ?>
 	<?php endif ?>
+
+	<div class="pleesher-logo-wrapper">
+		[https://pleesher.com <i class="pleesher-logo"></i>Achievements provided by Pleesher.]
+	</div>
 </div>

@@ -6,7 +6,7 @@
 			<div class="pleesher-cell pleesher-cell-logo">
 				<div class="pleesher-liquipedia-logo"></div>
 			</div>
-			<div class="pleesher-cell">
+			<div class="pleesher-cell pleesher-cell-main">
 				<div class="pleesher-achievement"><!--
 					--><div class="pleesher-achievement-title"><!--
 						--><a href="<?php echo $h->pageUrl('Special:AchievementDetails/' . $goal->code) ?>"><?php echo htmlspecialchars($goal->title) ?></a><!--

@@ -107,19 +107,47 @@
 	&.pleesher-goal-unearned {
 		background-color:@pleesher-achievement-bar-bg-unearned;
 	}
-	.pleesher-table {
-		display:table;
-		width:100%;
-		> .pleesher-row {
-			display:table-row;
-			> .pleesher-cell {
-				display:table-cell;
-				vertical-align:top;
-				&.pleesher-cell-logo {
-					width:100px;
+	@media(min-width:768px) {
+		.pleesher-table {
+			display:table;
+			width:100%;
+			> .pleesher-row {
+				display:table-row;
+				> .pleesher-cell {
+					display:table-cell;
+					vertical-align:top;
+					&.pleesher-cell-logo {
+						width:100px;
+					}
+					&.pleesher-cell-kudos {
+						width:100px;
+					}
 				}
-				&.pleesher-cell-kudos {
-					width:100px;
+			}
+		}
+	}
+	@media(max-width:767px) {
+		.pleesher-table {
+			width:100%;
+			> .pleesher-row {
+				position:relative;
+				> .pleesher-cell {
+					vertical-align:top;
+					&.pleesher-cell-logo {
+						width:100px;
+						position:absolute;
+						top:0;
+						left:0;
+					}
+					&.pleesher-cell-kudos {
+						width:100px;
+						position:absolute;
+						top:0;
+						right:0;
+					}
+					&.pleesher-cell-main {
+						padding-top:65px;
+					}
 				}
 			}
 		}

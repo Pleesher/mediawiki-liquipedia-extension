@@ -22,7 +22,7 @@
 							--><div class="pleesher-progress"><!--
 								--><div class="pleesher-progress-inner" style="width:<?php echo (min($goal->progress->current, $goal->progress->target) / $goal->progress->target * 100); ?>%;"></div><!--
 							--></div><!--
-							--><div class="pleesher-progress-text"><?php echo min($goal->progress->current, $goal->progress->target) ?> / <?php echo $goal->progress->target ?></div><!--
+							--><div class="pleesher-progress-text"><?php echo min($goal->progress->current, $goal->progress->target) ?>/<?php echo $goal->progress->target ?></div><!--
 						--></div><!--
 					--><?php endif ?><!--
 					--><?php if (!empty($goal->achieved)): ?><!--

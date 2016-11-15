@@ -8,10 +8,120 @@
 @pleesher-ranking-hover-bg:#d9e8f3;
 @pleesher-completion-date-color:#7f7f7f;
 @pleesher-heading-color:#696969;
+@pleesher-border-color:#dddddd;
+@pleesher-progress-inner-color:#ffffff;
 
+.pleesher-progress {
+	vertical-align:middle;
+	display:inline-block;
+	height:28px;
+	width:100%;
+	background-color:@pleesher-progress-back;
+	overflow:hidden;
+	position:relative;
+	.pleesher-progress-inner {
+		max-width:100%;
+		height:28px;
+		background-color:@pleesher-progress-front;
+	}
+	.pleesher-progress-text-fixed-left {
+		position:absolute;
+		top:4px;
+		left:10px;
+		color:@pleesher-progress-inner-color;
+	}
+	.pleesher-progress-text-fixed-right {
+		position:absolute;
+		top:4px;
+		right:10px;
+		color:@pleesher-progress-inner-color;
+	}
+	a,
+	a:visited,
+	a:focus,
+	a:hover {
+		color:inherit;
+	}
+}
+.pleesher-kudos {
+	text-align:center;
+	line-height:1;
+	margin-top:10px;
+	margin-bottom:2.5em;
+	> .pleesher-kudos-big {
+		font-size:2.5em;
+	}
+	> .pleesher-kudos-small {
+		font-size:1.1em;
+	}
+}
+.pleesher-liquigoals-title {
+	color:@pleesher-heading-color;
+	font-size:2em;
+	text-align:center;
+	margin-top:1.5em;
+}
+.pleesher-liquigoals {
+	@media(min-width:768px) {
+		border:1px solid @pleesher-border-color;
+		padding:30px;
+	}
+	.pleesher-liquigoals-title {
+		font-size:1.7em;
+		text-align:left;
+	}
+}
+.pleesher-professions {
+	margin-top:20px;
+	.pleesher-profession {
+		width:48%;
+		float:left;
+		&:nth-of-type(2n) {
+			float:right;
+		}
+		&:not(:last-of-type) {
+			margin-bottom:1em;
+		}
+		&:nth-of-type(2n+1):last-of-type {
+			float:none;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		@media(max-width:767px) {
+			width:100%;
+			float:none;
+		}
+	}
+	&:after {
+		content:" ";
+		display:block;
+		clear:both;
+	}
+}
+.pleesher-showcase {
+	text-align:center;
+	margin-top:20px;
+	.pleesher-showcase-item {
+		vertical-align:top;
+		margin-left:5px;
+		margin-right:5px;
+		margin-bottom:15px;
+		display:inline-block;
+		background-color:@pleesher-showcase-bg;
+		padding:5px;
+		width:100px;
+		.pleesher-showcase-item-icon {
+			background-image:url(./gfx/lp_logo.png);
+			width:90px;
+			height:90px;
+			background-position:center center;
+			background-repeat:no-repeat;
+		}
+	}
+}
 .pleesher-goal {
 	border-radius:@pleesher-border-radius;
-	padding:0 15px 1px;
+	padding:0 15px 10px;
 	margin-bottom:15px;
 	&.pleesher-goal-earned {
 		background-color:@pleesher-achievement-bar-bg-earned;
@@ -19,19 +129,47 @@
 	&.pleesher-goal-unearned {
 		background-color:@pleesher-achievement-bar-bg-unearned;
 	}
-	.pleesher-table {
-		display:table;
-		width:100%;
-		> .pleesher-row {
-			display:table-row;
-			> .pleesher-cell {
-				display:table-cell;
-				vertical-align:top;
-				&.pleesher-cell-logo {
-					width:100px;
+	@media(min-width:768px) {
+		.pleesher-table {
+			display:table;
+			width:100%;
+			> .pleesher-row {
+				display:table-row;
+				> .pleesher-cell {
+					display:table-cell;
+					vertical-align:top;
+					&.pleesher-cell-logo {
+						width:100px;
+					}
+					&.pleesher-cell-kudos {
+						width:100px;
+					}
 				}
-				&.pleesher-cell-kudos {
-					width:100px;
+			}
+		}
+	}
+	@media(max-width:767px) {
+		.pleesher-table {
+			width:100%;
+			> .pleesher-row {
+				position:relative;
+				> .pleesher-cell {
+					vertical-align:top;
+					&.pleesher-cell-logo {
+						width:100px;
+						position:absolute;
+						top:0;
+						left:0;
+					}
+					&.pleesher-cell-kudos {
+						width:100px;
+						position:absolute;
+						top:0;
+						right:0;
+					}
+					&.pleesher-cell-main {
+						padding-top:65px;
+					}
 				}
 			}
 		}
@@ -64,21 +202,16 @@
 		.pleesher-achievement-progress {
 			line-height:18px;
 			.pleesher-progress {
-				vertical-align:middle;
-				display:inline-block;
 				width:500px;
 				max-width:100%;
 				height:18px;
-				background-color:@pleesher-progress-back;
-				overflow:hidden;
 				margin-right:5px;
-				@media(max-width:700px) {
+				@media(max-width:767px) {
 					width:100%;
 				}
 				.pleesher-progress-inner {
 					max-width:100%;
 					height:18px;
-					background-color:@pleesher-progress-front;
 				}
 			}
 			.pleesher-progress-text {
@@ -95,19 +228,26 @@
 	}
 	.pleesher-kudos {
 		float:right;
-		text-align:center;
-		line-height:1;
-		margin-top:10px;
-		> .pleesher-kudos-big {
-			font-size:2.5em;
-		}
+		margin-bottom:0;
 		> .pleesher-kudos-small {
-			font-size:1.1em;
 			text-transform:uppercase;
 		}
 	}
 	.pleesher-heading {
 		color:@pleesher-heading-color;
+	}
+}
+.pleesher-logo-wrapper {
+	margin-top:40px;
+	.pleesher-logo {
+		background-image:url(./gfx/pleesher.png);
+		width:126px;
+		height:36px;
+		background-position:center center;
+		background-repeat:no-repeat;
+		display:inline-block;
+		margin-right:10px;
+		vertical-align:middle;
 	}
 }
 .liquigoalsTable {

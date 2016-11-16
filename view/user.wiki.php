@@ -15,37 +15,29 @@
 	--></div>
 	<div class="pleesher-liquigoals-title">Achievement Showcase</div>
 	<div class="pleesher-showcase">
-		<div class="pleesher-showcase-item">
+		<div class="pleesher-showcase-item" title="Send me pizza 1" data-toggle="popover-hover" data-placement="top" data-content="A good pizza :3">
 			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
 		</div>
-		<div class="pleesher-showcase-item">
+		<div class="pleesher-showcase-item" title="Send me pizza 2" data-toggle="popover-hover" data-placement="top" data-content="A good pizza :3">
 			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
 		</div>
-		<div class="pleesher-showcase-item">
+		<div class="pleesher-showcase-item" title="Send me pizza 3" data-toggle="popover-hover" data-placement="top" data-content="A good pizza :3">
 			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
 		</div>
-		<div class="pleesher-showcase-item">
+		<div class="pleesher-showcase-item" title="Send me pizza 4" data-toggle="popover-hover" data-placement="top" data-content="A good pizza :3">
 			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
 		</div>
-		<div class="pleesher-showcase-item">
+		<div class="pleesher-showcase-item" title="Send me pizza 5" data-toggle="popover-hover" data-placement="top" data-content="A good pizza :3">
 			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
 		</div>
-		<div class="pleesher-showcase-item">
+		<div class="pleesher-showcase-item" title="Send me pizza 6" data-toggle="popover-hover" data-placement="top" data-content="A good pizza :3">
 			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
 		</div>
-		<div class="pleesher-showcase-item">
+		<div class="pleesher-showcase-item" title="Send me pizza 7" data-toggle="popover-hover" data-placement="top" data-content="A good pizza :3">
 			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me even more pizza</div>
 		</div>
-		<div class="pleesher-showcase-item">
+		<div class="pleesher-showcase-item" title="Send me pizza 8" data-toggle="popover-hover" data-placement="top" data-content="A good pizza :3">
 			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me even more pizza, i'm still hungry</div>
 		</div>
 	</div>
 	<?php if (count($user_professions) > 0): ?>

@@ -13,41 +13,10 @@
 		--><span class="pleesher-progress-text-fixed-left">Achievements Completed</span><!--
 		--><span class="pleesher-progress-text-fixed-right"><?php echo min($achievement_count, $goal_count) . '/' . $goal_count; ?></span><!--
 	--></div>
+	<?php if ($showcased_achievement_count > 0): ?>
 	<div class="pleesher-liquigoals-title">Achievement Showcase</div>
-	<div class="pleesher-showcase">
-		<div class="pleesher-showcase-item">
-			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
-		</div>
-		<div class="pleesher-showcase-item">
-			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
-		</div>
-		<div class="pleesher-showcase-item">
-			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
-		</div>
-		<div class="pleesher-showcase-item">
-			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
-		</div>
-		<div class="pleesher-showcase-item">
-			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
-		</div>
-		<div class="pleesher-showcase-item">
-			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me pizza</div>
-		</div>
-		<div class="pleesher-showcase-item">
-			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me even more pizza</div>
-		</div>
-		<div class="pleesher-showcase-item">
-			<div class="pleesher-showcase-item-icon"></div>
-			<div class="pleesher-showcase-item-name">Send me even more pizza, i'm still hungry</div>
-		</div>
-	</div>
+	<Showcase user="<?php echo $user->getName() ?>" />
+	<?php endif ?>
 	<?php if (count($user_professions) > 0): ?>
 		<div class="pleesher-liquigoals-title">Professions</div>
 		<div class="pleesher-professions">
@@ -57,7 +26,6 @@
 						--><div class="pleesher-progress-inner" style="width:<?php echo (min($user_profession->kudos, $user_profession->kudos_needed_for_next_level) / $user_profession->kudos_needed_for_next_level * 100); ?>%;"></div><!--
 						--><span class="pleesher-progress-text-fixed-left">[[Special:Professions#profession-<?php echo $profession_key ?>|<?php echo $user_profession->title ?>]] Lv <?php echo $user_profession->level ?></span><!--
 						--><span class="pleesher-progress-text-fixed-right"><?php echo $user_profession->kudos . '/' . $user_profession->kudos_needed_for_next_level ?> Kudos</span><!--
-							
 					--></div>
 				</div>
 			<?php endforeach ?>

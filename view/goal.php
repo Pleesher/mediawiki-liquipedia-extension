@@ -27,7 +27,7 @@
 					--><?php endif ?><!--
 					--><?php if (!empty($goal->achieved)): ?><!--
 						--><div class="pleesher-achievement-date"><!--
-							--><?php 
+							--><?php
 								$tz = new DateTimeZone($goal->participation->datetime->timezone);
 								$t = new DateTime($goal->participation->datetime->date, $tz);
 								echo 'Achieved ' . date('M j, Y', $t->getTimestamp()) ?><!--
@@ -35,7 +35,12 @@
 					--><?php endif ?><!--
 					--><?php if (!empty($goal->achieved) && in_array('revoke', $actions)): ?><!--
 						--><div class="pleesher-achievement-revoke"><!--
-							--><a data-redirect="self" href="/api.php?action=liquigoals.revoke_achievement&user_id=<?php echo $user->getId() ?>&goal_id=<?php echo $goal->id ?>">Revoke</a><!--
+							--><a data-redirect="self" href="<?php echo $h->actionUrl('pleesher.revoke_achievement', ['user_id' => $user->getId(), 'goal_id' => $goal->id]) ?>">Revoke</a><!--
+						--></div><!--
+					--><?php endif ?><!--
+					--><?php if (empty($goal->showcased) && in_array('showcase', $actions)): ?><!--
+						--><div class="pleesher-achievement-revoke"><!--
+							--><a data-redirect="self" href="<?php echo $h->actionUrl('pleesher.showcase_achievement', ['goal_id' => $goal->id]) ?>">Showcase</a><!--
 						--></div><!--
 					--><?php endif ?><!--
 				--></div>

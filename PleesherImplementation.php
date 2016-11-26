@@ -52,7 +52,9 @@ class LiquiGoals_PleesherImplementation extends PleesherImplementation
 			return $user_profession->level > 0;
 		});
 
-		return ['user_professions' => $user_professions];
+		return array_merge(parent::getUserPageData($user), [
+			'user_professions' => $user_professions
+		]);
 	}
 
 	public function getViewsFolder()

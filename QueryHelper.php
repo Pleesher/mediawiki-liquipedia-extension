@@ -51,7 +51,7 @@ class LiquiGoals_QueryHelper
 		return $query->rowCount();
 	}
 
-	public function getMaxUserEditLength($user_id, array $filters = [])
+	public function getUserMaxEditLength($user_id, array $filters = [])
 	{
 		$joins  = [];
 		$wheres = [];
@@ -86,7 +86,7 @@ class LiquiGoals_QueryHelper
 		return $query->fetchColumn(0) ?: 0;
 	}
 
-	public function getMaxBumpDays($user_id, array $filters = [])
+	public function getUserMaxBumpDays($user_id, array $filters = [])
 	{
 		$joins  = [];
 		$wheres = [];
@@ -116,6 +116,53 @@ class LiquiGoals_QueryHelper
 		$query->execute(array_merge($params, [
 			':user_id' => $user_id
 		]));
+		return $query->fetchColumn(0) ?: 0;
+	}
+
+	public function getUserMaxEditStreak($user_id, array $filters = [])
+	{
+		$joins  = [];
+		$wheres = [];
+		$params = [];
+
+		if (isset($filters['category_title']))
+		{
+			$joins[]  = $this->prefixTableName('categorylinks') . ' cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
+			$wheres[] = 'cl.cl_to = :category_title';
+			$params[':category_title'] = $filters['category_title'];
+		}
+
+		$sql = '
+			SELECT streak
+			FROM (
+				SELECT IF(@prevDate + INTERVAL 1 DAY = current.date, @currentStreak := @currentStreak + 1, @currentStreak := 1) AS streak, @prevDate := current.date
+				FROM (
+					SELECT CONVERT(r.rev_timestamp, DATE) AS date
+					FROM ' . $this->prefixTableName('revision') . ' r';
+
+		if (count($joins) > 0)
+		$sql .= '
+					JOIN ' . join(' JOIN ', $joins);
+		$sql .= '
+					WHERE r.rev_user = :user_id';
+		if (count($wheres) > 0)
+			$sql .= '
+					AND ' . join(' AND ', $wheres);
+
+		$sql .= '
+					GROUP BY date
+					ORDER BY date
+				) AS current
+				INNER JOIN (SELECT @prevDate := NULL, @currentStreak := 1) AS vars
+			) AS _
+
+			ORDER BY streak DESC LIMIT 1';
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute(array_merge($params, [
+			':user_id' => $user_id
+		]));
+
 		return $query->fetchColumn(0) ?: 0;
 	}
 

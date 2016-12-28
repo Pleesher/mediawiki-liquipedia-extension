@@ -63,9 +63,30 @@ return [
 		}
 	],
 
+	'edit_streak_bronze' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserMaxEditStreak($user_id), 2];
+		}
+	],
+	'edit_streak_silver' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserMaxEditStreak($user_id), 7];
+		}
+	],
+	'edit_streak_gold' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserMaxEditStreak($user_id), 30];
+		}
+	],
+	'edit_streak_diamond' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserMaxEditStreak($user_id), 365];
+		}
+	],
+
 	'massive_edit' => [
 		'checker' => function($goal, $user_id, array $context) {
-			return [$context['query_helper']->getMaxUserEditLength($user_id), 100000];
+			return [$context['query_helper']->getUserMaxEditLength($user_id), 100000];
 		},
 		'professions' => ['historian']
 	],
@@ -77,7 +98,7 @@ return [
 	],
 	'necromancer' => [
 		'checker' => function($goal, $user_id, array $context) {
-			return [$context['query_helper']->getMaxBumpDays($user_id), 364];
+			return [$context['query_helper']->getUserMaxBumpDays($user_id), 364];
 		}
 	],
 ];

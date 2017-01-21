@@ -14,18 +14,7 @@ class LiquiGoals_QueryHelper
 		$wheres = [];
 		$params = [];
 
-		if (isset($filters['category_title']))
-		{
-			$joins[]  = $this->prefixTableName('categorylinks') . ' cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
-			$wheres[] = 'cl.cl_to = :category_title';
-			$params[':category_title'] = $filters['category_title'];
-		}
-
-		if (isset($filters['page_body_regex']))
-		{
-			$wheres[] = 't.old_text REGEXP :page_body_regex';
-			$params[':page_body_regex'] = $filters['page_body_regex'];
-		}
+		$this->applyEditFilters($filters, $joins, $wheres, $params);
 
 		$sql = '
 			SELECT LENGTH(t.old_text) AS new_text_length, LENGTH(pt.old_text) AS old_text_length
@@ -57,12 +46,7 @@ class LiquiGoals_QueryHelper
 		$wheres = [];
 		$params = [];
 
-		if (isset($filters['category_title']))
-		{
-			$joins[]  = $this->prefixTableName('categorylinks') . ' cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
-			$wheres[] = 'cl.cl_to = :category_title';
-			$params[':category_title'] = $filters['category_title'];
-		}
+		$this->applyEditFilters($filters, $joins, $wheres, $params);
 
 		$sql = '
 			SELECT MAX(LENGTH(t.old_text) - LENGTH(pt.old_text)) AS max_edit_length
@@ -125,12 +109,7 @@ class LiquiGoals_QueryHelper
 		$wheres = [];
 		$params = [];
 
-		if (isset($filters['category_title']))
-		{
-			$joins[]  = $this->prefixTableName('categorylinks') . ' cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
-			$wheres[] = 'cl.cl_to = :category_title';
-			$params[':category_title'] = $filters['category_title'];
-		}
+		$this->applyEditFilters($filters, $joins, $wheres, $params);
 
 		$sql = '
 			SELECT streak
@@ -164,6 +143,29 @@ class LiquiGoals_QueryHelper
 		]));
 
 		return $query->fetchColumn(0) ?: 0;
+	}
+
+	protected function applyEditFilters(array $filters, array &$joins, array &$wheres, array &$params)
+	{
+		if (isset($filters['category_title']))
+		{
+			$joins[] = $this->prefixTableName('categorylinks') . ' cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
+			$wheres[] = 'cl.cl_to = :category_title';
+			$params[':category_title'] = $filters['category_title'];
+		}
+
+		if (isset($filters['body_regex']))
+		{
+			$wheres[] = 't.old_text REGEXP :body_regex';
+			$params[':body_regex'] = $filters['body_regex'];
+		}
+
+		if (isset($filters['namespace']))
+		{
+			$joins[] = $this->prefixTableName('page') . ' p ON r.rev_page = p.page_id';
+			$wheres[] = 'p.page_namespace = :namespace';
+			$params[':namespace'] = (int)$filters['namespace'];
+		}
 	}
 
 	protected function prefixTableName($name)

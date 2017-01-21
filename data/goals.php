@@ -75,6 +75,31 @@ return [
 		'category' => 'teams'
 	],
 
+	'template_contributor_bronze' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return $context['query_helper']->getUserEditCount($user_id, ['namespace' => NS_TEMPLATE]) >= 1;
+		},
+		'category' => 'templates'
+	],
+	'template_contributor_silver' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserEditCount($user_id, ['namespace' => NS_TEMPLATE]), 50];
+		},
+		'category' => 'templates'
+	],
+	'template_contributor_gold' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserEditCount($user_id, ['namespace' => NS_TEMPLATE]), 2500];
+		},
+		'category' => 'templates'
+	],
+	'template_contributor_diamond' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserEditCount($user_id, ['namespace' => NS_TEMPLATE]), 100000];
+		},
+		'category' => 'templates'
+	],
+
 	'edit_streak_bronze' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return [$context['query_helper']->getUserMaxEditStreak($user_id), 2];
@@ -100,6 +125,31 @@ return [
 		'category' => 'general'
 	],
 
+	'necromancer_bronze' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserMaxBumpDays($user_id), 364];
+		},
+		'category' => 'unconventional'
+	],
+	'necromancer_silver' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserMaxBumpDays($user_id), 364 * 2];
+		},
+		'category' => 'unconventional'
+	],
+	'necromancer_gold' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserMaxBumpDays($user_id), 364 * 5];
+		},
+		'category' => 'unconventional'
+	],
+	'necromancer_diamond' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserMaxBumpDays($user_id), 364 * 10];
+		},
+		'category' => 'unconventional'
+	],
+
 	'massive_edit' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return [$context['query_helper']->getUserMaxEditLength($user_id), 100000];
@@ -113,11 +163,5 @@ return [
 		},
 		'category' => 'unconventional',
 		'professions' => ['historian', 'reporter']
-	],
-	'necromancer' => [
-		'checker' => function($goal, $user_id, array $context) {
-			return [$context['query_helper']->getUserMaxBumpDays($user_id), 364];
-		},
-		'category' => 'unconventional'
 	],
 ];

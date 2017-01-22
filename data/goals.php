@@ -75,29 +75,54 @@ return [
 		'category' => 'teams'
 	],
 
+	'transfer_contributor_bronze' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return $context['query_helper']->getUserEditCount($user_id, ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)']) >= 1;
+		},
+		'category' => 'transfers'
+	],
+	'transfer_contributor_silver' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserEditCount($user_id,  ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)']), 50];
+		},
+		'category' => 'transfers'
+	],
+	'transfer_contributor_gold' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserEditCount($user_id,  ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)']), 2500];
+		},
+		'category' => 'transfers'
+	],
+	'transfer_contributor_diamond' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserEditCount($user_id,  ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)']), 100000];
+		},
+		'category' => 'transfers'
+	],
+
 	'template_contributor_bronze' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return $context['query_helper']->getUserEditCount($user_id, ['namespace' => NS_TEMPLATE]) >= 1;
 		},
-		'category' => 'templates'
+		'category' => 'improving_liquipedia'
 	],
 	'template_contributor_silver' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return [$context['query_helper']->getUserEditCount($user_id, ['namespace' => NS_TEMPLATE]), 50];
 		},
-		'category' => 'templates'
+		'category' => 'improving_liquipedia'
 	],
 	'template_contributor_gold' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return [$context['query_helper']->getUserEditCount($user_id, ['namespace' => NS_TEMPLATE]), 2500];
 		},
-		'category' => 'templates'
+		'category' => 'improving_liquipedia'
 	],
 	'template_contributor_diamond' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return [$context['query_helper']->getUserEditCount($user_id, ['namespace' => NS_TEMPLATE]), 100000];
 		},
-		'category' => 'templates'
+		'category' => 'improving_liquipedia'
 	],
 
 	'edit_streak_bronze' => [

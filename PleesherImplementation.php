@@ -8,7 +8,7 @@ class LiquiGoals_PleesherImplementation extends PleesherImplementation
 
 	public function getGoalCategories()
 	{
-		return ['general', 'players', 'teams', 'unconventional'];
+		return ['general', 'players', 'teams', 'transfers', 'improving_liquipedia', 'unconventional'];
 	}
 
 	public function getI18nPrefix()

@@ -147,6 +147,9 @@ class LiquiGoals_QueryHelper
 
 	protected function applyEditFilters(array $filters, array &$joins, array &$wheres, array &$params)
 	{
+		if (isset($filters['page_title_regex']) || isset($filters['namespace']))
+			$joins[] = $this->prefixTableName('page') . ' p ON r.rev_page = p.page_id';
+
 		if (isset($filters['category_title']))
 		{
 			$joins[] = $this->prefixTableName('categorylinks') . ' cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
@@ -160,9 +163,14 @@ class LiquiGoals_QueryHelper
 			$params[':body_regex'] = $filters['body_regex'];
 		}
 
+		if (isset($filters['page_title_regex']))
+		{
+			$wheres[] = 'p.page_title REGEXP :page_title_regex';
+			$params[':page_title_regex'] = $filters['page_title_regex'];
+		}
+
 		if (isset($filters['namespace']))
 		{
-			$joins[] = $this->prefixTableName('page') . ' p ON r.rev_page = p.page_id';
 			$wheres[] = 'p.page_namespace = :namespace';
 			$params[':namespace'] = (int)$filters['namespace'];
 		}

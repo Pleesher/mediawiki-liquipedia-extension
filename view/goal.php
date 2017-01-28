@@ -33,9 +33,11 @@
 								echo 'Achieved ' . date('M j, Y', $t->getTimestamp()) ?><!--
 						--></div><!--
 					--><?php endif ?><!--
-					--><?php if (!empty($goal->achieved) && in_array('revoke', $actions)): ?><!--
+					--><?php if (isset($user) && !empty($goal->achieved) && in_array('revoke', $actions)): ?><!--
 						--><div class="pleesher-achievement-revoke"><!--
-							--><a data-redirect="self" href="<?php echo $h->actionUrl('pleesher.revoke_achievement', ['user_id' => $user->getId(), 'goal_id' => $goal->id]) ?>">Revoke</a><!--
+							--><a data-redirect="self" href="<?php echo $h->actionUrl('pleesher.revoke_achievement', ['user_id' => $user->getId(), 'goal_id' => $goal->id, 'duration' => 'forever']) ?>"
+								data-confirm="<?php echo $h->text('pleesher.revoke_achievement.confirm') ?>"
+								>Revoke</a><!--
 						--></div><!--
 					--><?php endif ?><!--
 					--><?php if (empty($goal->showcased) && in_array('showcase', $actions)): ?><!--

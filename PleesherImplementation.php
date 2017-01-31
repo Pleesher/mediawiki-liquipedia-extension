@@ -6,6 +6,16 @@ class LiquiGoals_PleesherImplementation extends PleesherImplementation
 		return require __DIR__ . '/data/goals.php';
 	}
 
+	public function getGoalCategories()
+	{
+		return ['general', 'players', 'teams', 'transfers', 'improving_liquipedia', 'unconventional'];
+	}
+
+	public function getI18nPrefix()
+	{
+		return 'liquigoals';
+	}
+
 	public function getGoalCheckingContext()
 	{
 		return [

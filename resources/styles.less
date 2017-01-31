@@ -10,6 +10,7 @@
 @pleesher-heading-color:#696969;
 @pleesher-border-color:#dddddd;
 @pleesher-progress-inner-color:#ffffff;
+@pleesher-showcase-remove-border:#2d5f93;
 
 .pleesher-progress {
 	vertical-align:middle;
@@ -116,6 +117,18 @@
 			height:90px;
 			background-position:center center;
 			background-repeat:no-repeat;
+			.pleesher-showcase-item-icon-remove {
+				background-color:#ffffff;
+				width:25px;
+				height:25px;
+				display:block;
+				float:right;
+				text-align:center;
+				line-height:23px;
+				border:1px solid @pleesher-showcase-remove-border;
+				margin-right:-4px;
+				margin-top:-4px;
+			}
 		}
 	}
 }
@@ -259,5 +272,40 @@
 	}
 	> tbody > tr:hover {
 		background-color:@pleesher-ranking-hover-bg;
+	}
+}
+
+#toast-container {
+	> .toast {
+		-webkit-box-shadow:0 5px 10px rgba(0, 0, 0, 0.2);
+		box-shadow:0 5px 10px rgba(0, 0, 0, 0.2);
+		opacity:1;
+		border-radius:0;
+		padding:0 0 0 50px;
+		&:hover {
+			-webkit-box-shadow:0 5px 10px rgba(0, 0, 0, 0.4);
+			box-shadow:0 5px 10px rgba(0, 0, 0, 0.4);
+		}
+		> .toast-title {
+			margin:0;
+			padding:8px 14px;
+			font-size:11pt;
+			background-color:#f7f7f7;
+			border-bottom:1px solid #ebebeb;
+			border-radius:-1px -1px 0 0;
+			color:#000000;
+		}
+		> .toast-message {
+			padding:9px 14px;
+			background-color:#ffffff;
+			color:#000000;
+			a {
+				color:#666666;
+				text-decoration:underline;
+			}
+		}
+	}
+	> .toast-success {
+		background-position:13px center;
 	}
 }

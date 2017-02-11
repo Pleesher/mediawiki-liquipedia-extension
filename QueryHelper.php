@@ -8,6 +8,34 @@ class LiquiGoals_QueryHelper
 		$this->pdo = $pdo;
 	}
 
+	public function getUserPageCreationCount($user_id, array $filters = [])
+	{
+		$joins  = [];
+		$wheres = [];
+		$params = [];
+
+		$this->applyEditFilters($filters, $joins, $wheres, $params);
+
+		$sql = '
+			SELECT COUNT(*)
+			FROM ' . $this->prefixTableName('revision') . ' r
+			JOIN ' . $this->prefixTableName('page') . ' p ON r.rev_page = p.page_id';
+		if (count($joins) > 0)
+			$sql .= ' JOIN ' . join(' JOIN ', $joins);
+		$sql .= '
+			WHERE r.rev_user = :user_id
+			AND   r.rev_parent_id = 0';
+		if (count($wheres) > 0)
+			$sql .= ' AND ' . join(' AND ', $wheres);
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute(array_merge($params, [
+			':user_id' => $user_id
+		]));
+
+		return $query->fetchColumn(0) ?: 0;
+	}
+
 	public function getUserEditCount($user_id, array $filters = [])
 	{
 		$joins  = [];

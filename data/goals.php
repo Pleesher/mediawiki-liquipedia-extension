@@ -1,5 +1,30 @@
 <?php
 return [
+	'content_creator_bronze' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return $context['query_helper']->getUserPageCreationCount($user_id) >= 1;
+		},
+		'category' => 'general'
+	],
+	'content_creator_silver' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserPageCreationCount($user_id), 10];
+		},
+		'category' => 'general'
+	],
+	'content_creator_gold' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserPageCreationCount($user_id), 100];
+		},
+		'category' => 'general'
+	],
+	'content_creator_diamond' => [
+		'checker' => function($goal, $user_id, array $context) {
+			return [$context['query_helper']->getUserPageCreationCount($user_id), 1000];
+		},
+		'category' => 'general'
+	],
+
 	'contributor_bronze' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return $context['query_helper']->getUserEditCount($user_id) >= 1;

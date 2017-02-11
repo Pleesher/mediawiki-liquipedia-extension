@@ -14,7 +14,11 @@ class LiquiGoals_QueryHelper
 		$wheres = [];
 		$params = [];
 
-		$this->applyEditFilters($filters, $joins, $wheres, $params);
+		if (isset($filters['namespace']))
+		{
+			$wheres[] = 'p.page_namespace = :namespace';
+			$params[':namespace'] = (int)$filters['namespace'];
+		}
 
 		$sql = '
 			SELECT COUNT(*)

@@ -7,6 +7,7 @@
 	"url": "http://wiki.teamliquid.net/",
 	"descriptionmsg": "liquigoals-desc",
 	"license-name": "MIT",
+	"type": "pleesher",
 	"requires": {
 		"MediaWiki": ">= 1.25.0",
 		"Pleesher": ">= 0.9"
@@ -36,6 +37,9 @@
 		],
 		"BeforePageDisplay": [
 			"LiquiGoals::beforePageDisplay"
+		],
+		"ExtensionTypes": [
+			"LiquiGoals::extensionTypes"
 		]
 	},
 	"SpecialPages": {

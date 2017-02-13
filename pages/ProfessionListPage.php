@@ -6,6 +6,10 @@ class LiquiGoals_ProfessionListPage extends SpecialPage
 		parent::__construct('Professions');
 	}
 
+	function getGroupName() {
+		return 'pleesher';
+	}
+
 	public function execute($subPage)
 	{
 		$this->setHeaders();

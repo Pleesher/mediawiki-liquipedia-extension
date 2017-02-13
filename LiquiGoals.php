@@ -47,6 +47,13 @@ class LiquiGoals
 		}
 	}
 
+	public static function extensionTypes(array &$extensionTypes)
+	{
+		$extensionTypes['pleesher'] = wfMessage( 'version-pleesher' )->text();
+
+		return true;
+	}
+
 	public static function viewUserKudos($input, array $args, Parser $parser, PPFrame $frame)
 	{
 		$username = $args['user'];

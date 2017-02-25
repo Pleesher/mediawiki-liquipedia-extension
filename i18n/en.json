@@ -16,5 +16,8 @@
 	"liquigoals.goal_category.teams": "Teams",
 	"liquigoals.goal_category.transfers": "Transfers",
 	"liquigoals.goal_category.improving_liquipedia": "Improving Liquipedia",
-	"liquigoals.goal_category.unconventional": "Unconventional"
+	"liquigoals.goal_category.unconventional": "Unconventional",
+	
+	"specialpages-group-pleesher": "Pleesher",
+	"version-pleesher": "Pleesher"
 }

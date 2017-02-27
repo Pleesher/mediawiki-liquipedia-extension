@@ -72,13 +72,10 @@ class LiquiGoals_QueryHelper
 			WHERE r.rev_user = :user_id';
 		if (count($wheres) > 0)
 			$sql .= ' AND ' . join(' AND ', $wheres);
-		$sql .= '
-			HAVING ABS(new_text_length - old_text_length) > :min_edit_length';
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute(array_merge($params, [
-			':user_id' => $user_id,
-			':min_edit_length' => LiquiGoals::getConfigValue('MinEditLength')
+			':user_id' => $user_id
 		]));
 
 		return $query->rowCount();

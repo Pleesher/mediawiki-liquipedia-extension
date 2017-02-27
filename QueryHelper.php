@@ -226,7 +226,7 @@ class LiquiGoals_QueryHelper
 	protected function getTimezoneOffset()
 	{
 		$minutes = (new DateTime())->getOffset() / 60;
-		$sign = ($minutes < 0 ? -1 : 1);
+		$sign = $minutes < 0 ? -1 : 1;
 		$minutes = abs($minutes);
 		$hours = floor($minutes / 60);
 		$minutes -= $hours * 60;

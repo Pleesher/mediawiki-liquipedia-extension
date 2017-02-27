@@ -157,7 +157,7 @@ class LiquiGoals_QueryHelper
 			FROM (
 				SELECT IF(@prevDate + INTERVAL 1 DAY = current.date, @currentStreak := @currentStreak + 1, @currentStreak := 1) AS streak, @prevDate := current.date
 				FROM (
-					SELECT CONVERT(r.rev_timestamp, DATE) AS date
+					SELECT CONVERT_TZ(CONVERT(r.rev_timestamp, DATE), \'+00:00\', \'' . $this->getTimezoneOffset() . '\') AS date
 					FROM ' . $this->prefixTableName('revision') . ' r';
 
 		if (count($joins) > 0)
@@ -221,5 +221,16 @@ class LiquiGoals_QueryHelper
 	protected function prefixTableName($name)
 	{
 		return isset($GLOBALS['wgDBprefix']) ? $GLOBALS['wgDBprefix'] . $name : $name;
+	}
+
+	protected function getTimezoneOffset()
+	{
+		$minutes = (new DateTime())->getOffset() / 60;
+		$sign = ($minutes < 0 ? -1 : 1);
+		$minutes = abs($minutes);
+		$hours = floor($minutes / 60);
+		$minutes -= $hours * 60;
+
+		return sprintf('%+d:%02d', $hours * $sign, $minutes);
 	}
 }

@@ -164,7 +164,8 @@ class LiquiGoals_QueryHelper
 		$sql .= '
 					JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
-					WHERE r.rev_user = :user_id';
+					WHERE r.rev_user = :user_id
+					AND   r.parent_id <> 0';
 		if (count($wheres) > 0)
 			$sql .= '
 					AND ' . join(' AND ', $wheres);

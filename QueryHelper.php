@@ -157,7 +157,7 @@ class LiquiGoals_QueryHelper
 			FROM (
 				SELECT IF(@prevDate + INTERVAL 1 DAY = current.date, @currentStreak := @currentStreak + 1, @currentStreak := 1) AS streak, @prevDate := current.date
 				FROM (
-					SELECT CONVERT_TZ(CONVERT(r.rev_timestamp, DATE), \'+00:00\', \'' . $this->getTimezoneOffset() . '\') AS date
+					SELECT CONVERT(CONVERT_TZ(CONVERT(r.rev_timestamp, DATETIME), \'+00:00\', \'' . $this->getTimezoneOffset() . '\'), DATE) AS date
 					FROM ' . $this->prefixTableName('revision') . ' r';
 
 		if (count($joins) > 0)

@@ -13,10 +13,6 @@
 		"Pleesher": ">= 0.9"
 	},
 	
-	"config": {
-		"LiquiGoalsMinEditLength": 10
-	},
-	
 	"callback": "LiquiGoals::initialize",
 	
 	"MessagesDirs": {

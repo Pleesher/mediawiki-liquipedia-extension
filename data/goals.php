@@ -1,4 +1,6 @@
 <?php
+$_team_templates_page_title_regex = '^(Team2?(Short)?/|TeamBracket/|TeamPart/|TeamIcon/|TeamPage/)';
+
 return [
 	'content_creator_bronze' => [
 		'checker' => function($goal, $user_id, array $context) {
@@ -146,6 +148,31 @@ return [
 	'template_contributor_diamond' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return [$context['query_helper']->getUserEditCount($user_id, ['namespace' => NS_TEMPLATE]), 100000];
+		},
+		'category' => 'improving_liquipedia'
+	],
+
+	'template_creator_bronze' => [
+		'checker' => function($goal, $user_id, array $context) use($_team_templates_page_title_regex) {
+			return $context['query_helper']->getUserPageCreationCount($user_id, ['namespace' => NS_TEMPLATE, 'page_title_negative_regex' => $_team_templates_page_title_regex]) >= 1;
+		},
+		'category' => 'improving_liquipedia'
+	],
+	'template_creator_silver' => [
+		'checker' => function($goal, $user_id, array $context) use($_team_templates_page_title_regex) {
+			return [$context['query_helper']->getUserPageCreationCount($user_id, ['namespace' => NS_TEMPLATE, 'page_title_negative_regex' => $_team_templates_page_title_regex]), 10];
+		},
+		'category' => 'improving_liquipedia'
+	],
+	'template_creator_gold' => [
+		'checker' => function($goal, $user_id, array $context) use($_team_templates_page_title_regex) {
+			return [$context['query_helper']->getUserPageCreationCount($user_id, ['namespace' => NS_TEMPLATE, 'page_title_negative_regex' => $_team_templates_page_title_regex]), 100];
+		},
+		'category' => 'improving_liquipedia'
+	],
+	'template_creator_diamond' => [
+		'checker' => function($goal, $user_id, array $context) use($_team_templates_page_title_regex) {
+			return [$context['query_helper']->getUserPageCreationCount($user_id, ['namespace' => NS_TEMPLATE, 'page_title_negative_regex' => $_team_templates_page_title_regex]), 1000];
 		},
 		'category' => 'improving_liquipedia'
 	],

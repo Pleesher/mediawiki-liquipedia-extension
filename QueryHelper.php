@@ -20,6 +20,18 @@ class LiquiGoals_QueryHelper
 			$params[':namespace'] = (int)$filters['namespace'];
 		}
 
+		if (isset($filters['page_title_regex']))
+		{
+			$wheres[] = 'p.page_title REGEXP :page_title_regex';
+			$params[':page_title_regex'] = $filters['page_title_regex'];
+		}
+
+		if (isset($filters['page_title_negative_regex']))
+		{
+			$wheres[] = 'p.page_title REGEXP :page_title_negative_regex = 0';
+			$params[':page_title_negative_regex'] = $filters['page_title_negative_regex'];
+		}
+
 		$sql = '
 			SELECT COUNT(*)
 			FROM ' . $this->prefixTableName('revision') . ' r
@@ -60,13 +72,10 @@ class LiquiGoals_QueryHelper
 			WHERE r.rev_user = :user_id';
 		if (count($wheres) > 0)
 			$sql .= ' AND ' . join(' AND ', $wheres);
-		$sql .= '
-			HAVING ABS(new_text_length - old_text_length) > :min_edit_length';
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute(array_merge($params, [
-			':user_id' => $user_id,
-			':min_edit_length' => LiquiGoals::getConfigValue('MinEditLength')
+			':user_id' => $user_id
 		]));
 
 		return $query->rowCount();
@@ -148,14 +157,15 @@ class LiquiGoals_QueryHelper
 			FROM (
 				SELECT IF(@prevDate + INTERVAL 1 DAY = current.date, @currentStreak := @currentStreak + 1, @currentStreak := 1) AS streak, @prevDate := current.date
 				FROM (
-					SELECT CONVERT(r.rev_timestamp, DATE) AS date
+					SELECT CONVERT(CONVERT_TZ(CONVERT(r.rev_timestamp, DATETIME), \'+00:00\', \'' . $this->getTimezoneOffset() . '\'), DATE) AS date
 					FROM ' . $this->prefixTableName('revision') . ' r';
 
 		if (count($joins) > 0)
 		$sql .= '
 					JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
-					WHERE r.rev_user = :user_id';
+					WHERE r.rev_user = :user_id
+					AND   r.rev_parent_id <> 0';
 		if (count($wheres) > 0)
 			$sql .= '
 					AND ' . join(' AND ', $wheres);
@@ -211,5 +221,16 @@ class LiquiGoals_QueryHelper
 	protected function prefixTableName($name)
 	{
 		return isset($GLOBALS['wgDBprefix']) ? $GLOBALS['wgDBprefix'] . $name : $name;
+	}
+
+	protected function getTimezoneOffset()
+	{
+		$minutes = (new DateTime())->getOffset() / 60;
+		$sign = $minutes < 0 ? -1 : 1;
+		$minutes = abs($minutes);
+		$hours = floor($minutes / 60);
+		$minutes -= $hours * 60;
+
+		return sprintf('%+d:%02d', $hours * $sign, $minutes);
 	}
 }

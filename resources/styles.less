@@ -40,8 +40,12 @@
 	a,
 	a:visited,
 	a:focus,
-	a:hover {
-		color:inherit;
+	a:hover,
+	.mw-body a.extiw:visited,
+	.mw-body a.external:visited,
+	.main-content a:visited:not(.new) {
+		color:@pleesher-progress-inner-color !important;
+		text-decoration:underline;
 	}
 }
 .pleesher-kudos {

@@ -32,7 +32,7 @@ class LiquiGoals
 		$out->addModuleStyles( 'ext.liquigoals' );
 		// TODO: remove all the code below (temporary)
 
-		if (isset($GLOBALS['wgUser']))
+		if (isset($GLOBALS['wgUser']) && $GLOBALS['wgUser']->isLoggedIn())
 		{
 			if ($out->getTitle()->getText() == 'RecheckAllMyAchievements')
 			{
@@ -44,6 +44,8 @@ class LiquiGoals
 				foreach (PleesherExtension::getUsers() as $user)
 					PleesherExtension::$pleesher->checkAchievements($user->getId());
 			}
+			else if ($out->getTitle()->getText() == 'CreateAccount' && $out->getTitle()->getNamespace() == NS_SPECIAL)
+				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getId());
 		}
 	}
 

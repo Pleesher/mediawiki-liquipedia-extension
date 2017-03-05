@@ -61,7 +61,7 @@ class LiquiGoals_QueryHelper
 		$this->applyEditFilters($filters, $joins, $wheres, $params);
 
 		$sql = '
-			SELECT LENGTH(t.old_text) AS new_text_length, LENGTH(pt.old_text) AS old_text_length
+			SELECT 1
 			FROM ' . $this->prefixTableName('revision') . ' r
 			JOIN ' . $this->prefixTableName('text') . ' t ON r.rev_text_id = t.old_id
 			JOIN ' . $this->prefixTableName('revision') . ' pr ON r.rev_parent_id = pr.rev_id

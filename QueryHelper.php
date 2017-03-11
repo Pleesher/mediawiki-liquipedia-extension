@@ -10,6 +10,11 @@ class LiquiGoals_QueryHelper
 
 	public function getUserPageCreationCount($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
@@ -49,11 +54,17 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		return $query->fetchColumn(0) ?: 0;
+		$result_cache[$parameters_encoded] = $query->fetchColumn(0) ?: 0;
+		return $result_cache[$parameters_encoded];
 	}
 
 	public function getUserEditCount($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
@@ -78,11 +89,17 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		return $query->rowCount();
+		$result_cache[$parameters_encoded] = $query->rowCount();
+		return $result_cache[$parameters_encoded];
 	}
 
 	public function getUserMaxEditLength($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
@@ -108,11 +125,18 @@ class LiquiGoals_QueryHelper
 		$query->execute(array_merge($params, [
 			':user_id' => $user_id
 		]));
-		return $query->fetchColumn(0) ?: 0;
+
+		$result_cache[$parameters_encoded] = $query->fetchColumn(0) ?: 0;
+		return $result_cache[$parameters_encoded];
 	}
 
 	public function getUserMaxBumpDays($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
@@ -141,11 +165,18 @@ class LiquiGoals_QueryHelper
 		$query->execute(array_merge($params, [
 			':user_id' => $user_id
 		]));
-		return $query->fetchColumn(0) ?: 0;
+
+		$result_cache[$parameters_encoded] = $query->fetchColumn(0) ?: 0;
+		return $result_cache[$parameters_encoded];
 	}
 
 	public function getUserMaxEditStreak($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
@@ -184,7 +215,8 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		return $query->fetchColumn(0) ?: 0;
+		$result_cache[$parameters_encoded] = $query->fetchColumn(0) ?: 0;
+		return $result_cache[$parameters_encoded];
 	}
 
 	protected function applyEditFilters(array $filters, array &$joins, array &$wheres, array &$params)

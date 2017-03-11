@@ -61,7 +61,7 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		$result_cache[$parameters_encoded] = $query->fetchColumn(0) ?: 0;
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
 		return $result_cache[$parameters_encoded];
 	}
 
@@ -79,7 +79,7 @@ class LiquiGoals_QueryHelper
 		$this->applyEditFilters($filters, $joins, $wheres, $params);
 
 		$sql = '
-			SELECT 1
+			SELECT COUNT(*)
 			FROM ' . $this->prefixTableName('revision') . ' r
 			JOIN ' . $this->prefixTableName('text') . ' t ON r.rev_text_id = t.old_id
 			JOIN ' . $this->prefixTableName('revision') . ' pr ON r.rev_parent_id = pr.rev_id
@@ -96,7 +96,7 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		$result_cache[$parameters_encoded] = $query->rowCount();
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
 		return $result_cache[$parameters_encoded];
 	}
 
@@ -133,7 +133,7 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		$result_cache[$parameters_encoded] = $query->fetchColumn(0) ?: 0;
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
 		return $result_cache[$parameters_encoded];
 	}
 
@@ -173,7 +173,7 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		$result_cache[$parameters_encoded] = $query->fetchColumn(0) ?: 0;
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
 		return $result_cache[$parameters_encoded];
 	}
 
@@ -222,7 +222,7 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		$result_cache[$parameters_encoded] = $query->fetchColumn(0) ?: 0;
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
 		return $result_cache[$parameters_encoded];
 	}
 

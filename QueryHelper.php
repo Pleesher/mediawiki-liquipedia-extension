@@ -1,4 +1,5 @@
 <?php
+// TODO: unDRY this up a bit more
 class LiquiGoals_QueryHelper
 {
 	protected $pdo;
@@ -21,8 +22,14 @@ class LiquiGoals_QueryHelper
 
 		if (isset($filters['namespace']))
 		{
-			$wheres[] = 'p.page_namespace = :namespace';
-			$params[':namespace'] = (int)$filters['namespace'];
+			$namespaces = (array)$filters['namespace'];
+			if (count($namespaces) == 1)
+			{
+				$wheres[] = 'p.page_namespace = :namespace';
+				$params[':namespace'] = (int)reset($namespaces);
+			}
+			else
+				$wheres[] = 'p.page_namespace IN (' . join(', ', array_map(function($namespace) { return (int)$namespace; }, $namespaces)) . ')';
 		}
 
 		if (isset($filters['page_title_regex']))
@@ -245,8 +252,14 @@ class LiquiGoals_QueryHelper
 
 		if (isset($filters['namespace']))
 		{
-			$wheres[] = 'p.page_namespace = :namespace';
-			$params[':namespace'] = (int)$filters['namespace'];
+			$namespaces = (array)$filters['namespace'];
+			if (count($namespaces) == 1)
+			{
+				$wheres[] = 'p.page_namespace = :namespace';
+				$params[':namespace'] = (int)reset($namespaces);
+			}
+			else
+				$wheres[] = 'p.page_namespace IN (' . join(', ', array_map(function($namespace) { return (int)$namespace; }, $namespaces)) . ')';
 		}
 	}
 

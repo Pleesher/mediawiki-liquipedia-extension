@@ -80,14 +80,12 @@ class LiquiGoals_QueryHelper
 
 		$sql = '
 			SELECT COUNT(*)
-			FROM ' . $this->prefixTableName('revision') . ' r
-			JOIN ' . $this->prefixTableName('text') . ' t ON r.rev_text_id = t.old_id
-			JOIN ' . $this->prefixTableName('revision') . ' pr ON r.rev_parent_id = pr.rev_id
-			JOIN ' . $this->prefixTableName('text') . ' pt ON pr.rev_text_id = pt.old_id';
+			FROM ' . $this->prefixTableName('revision') . ' r';
 		if (count($joins) > 0)
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
-			WHERE r.rev_user = :user_id';
+			WHERE r.rev_user = :user_id
+			AND r.rev_parent_id <> 0';
 		if (count($wheres) > 0)
 			$sql .= ' AND ' . join(' AND ', $wheres);
 

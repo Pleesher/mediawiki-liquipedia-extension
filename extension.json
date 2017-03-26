@@ -40,7 +40,6 @@
 		]
 	},
 	"SpecialPages": {
-		"Professions": "LiquiGoals_ProfessionListPage",
 		"Test": "LiquiGoals_TestPage"
 	},
 	"ResourceModules": {

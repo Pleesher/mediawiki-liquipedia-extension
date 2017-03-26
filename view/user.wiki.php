@@ -17,7 +17,7 @@
 	<div class="pleesher-liquigoals-title">Achievement Showcase</div>
 	<Showcase user="<?php echo $user->getName() ?>" />
 	<?php endif ?>
-	<?php if (count($user_professions) > 0): ?>
+	<?php if (false && count($user_professions) > 0): ?>
 		<div class="pleesher-liquigoals-title">Professions</div>
 		<div class="pleesher-professions">
 			<?php foreach ($user_professions as $profession_key => $user_profession): ?>

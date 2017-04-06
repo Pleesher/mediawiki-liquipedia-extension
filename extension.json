@@ -25,7 +25,8 @@
 		"LiquiGoals": "LiquiGoals.php",
 		"LiquiGoals_PleesherImplementation": "PleesherImplementation.php",
 		"LiquiGoals_QueryHelper": "QueryHelper.php",
-		"LiquiGoals_ProfessionListPage": "pages/ProfessionListPage.php"
+		"LiquiGoals_ProfessionListPage": "pages/ProfessionListPage.php",
+		"LiquiGoals_TestPage": "pages/TestPage.php"
 	},
 	"Hooks": {
 		"ParserFirstCallInit": [
@@ -39,7 +40,7 @@
 		]
 	},
 	"SpecialPages": {
-		"Professions": "LiquiGoals_ProfessionListPage"
+		"Test": "LiquiGoals_TestPage"
 	},
 	"ResourceModules": {
 		"ext.liquigoals": {

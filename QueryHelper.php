@@ -1,4 +1,5 @@
 <?php
+// TODO: unDRY this up a bit more
 class LiquiGoals_QueryHelper
 {
 	protected $pdo;
@@ -10,14 +11,25 @@ class LiquiGoals_QueryHelper
 
 	public function getUserPageCreationCount($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
 
 		if (isset($filters['namespace']))
 		{
-			$wheres[] = 'p.page_namespace = :namespace';
-			$params[':namespace'] = (int)$filters['namespace'];
+			$namespaces = (array)$filters['namespace'];
+			if (count($namespaces) == 1)
+			{
+				$wheres[] = 'p.page_namespace = :namespace';
+				$params[':namespace'] = (int)reset($namespaces);
+			}
+			else
+				$wheres[] = 'p.page_namespace IN (' . join(', ', array_map(function($namespace) { return (int)$namespace; }, $namespaces)) . ')';
 		}
 
 		if (isset($filters['page_title_regex']))
@@ -49,11 +61,17 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		return $query->fetchColumn(0) ?: 0;
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
+		return $result_cache[$parameters_encoded];
 	}
 
 	public function getUserEditCount($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
@@ -61,15 +79,13 @@ class LiquiGoals_QueryHelper
 		$this->applyEditFilters($filters, $joins, $wheres, $params);
 
 		$sql = '
-			SELECT LENGTH(t.old_text) AS new_text_length, LENGTH(pt.old_text) AS old_text_length
-			FROM ' . $this->prefixTableName('revision') . ' r
-			JOIN ' . $this->prefixTableName('text') . ' t ON r.rev_text_id = t.old_id
-			JOIN ' . $this->prefixTableName('revision') . ' pr ON r.rev_parent_id = pr.rev_id
-			JOIN ' . $this->prefixTableName('text') . ' pt ON pr.rev_text_id = pt.old_id';
+			SELECT COUNT(*)
+			FROM ' . $this->prefixTableName('revision') . ' r';
 		if (count($joins) > 0)
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
-			WHERE r.rev_user = :user_id';
+			WHERE r.rev_user = :user_id
+			AND r.rev_parent_id <> 0';
 		if (count($wheres) > 0)
 			$sql .= ' AND ' . join(' AND ', $wheres);
 
@@ -78,11 +94,17 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		return $query->rowCount();
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
+		return $result_cache[$parameters_encoded];
 	}
 
 	public function getUserMaxEditLength($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
@@ -108,11 +130,18 @@ class LiquiGoals_QueryHelper
 		$query->execute(array_merge($params, [
 			':user_id' => $user_id
 		]));
-		return $query->fetchColumn(0) ?: 0;
+
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
+		return $result_cache[$parameters_encoded];
 	}
 
 	public function getUserMaxBumpDays($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
@@ -141,11 +170,18 @@ class LiquiGoals_QueryHelper
 		$query->execute(array_merge($params, [
 			':user_id' => $user_id
 		]));
-		return $query->fetchColumn(0) ?: 0;
+
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
+		return $result_cache[$parameters_encoded];
 	}
 
 	public function getUserMaxEditStreak($user_id, array $filters = [])
 	{
+		static $result_cache = [];
+		$parameters_encoded = json_encode(func_get_args());
+		if (isset($result_cache[$parameters_encoded]))
+			return $result_cache[$parameters_encoded];
+
 		$joins  = [];
 		$wheres = [];
 		$params = [];
@@ -184,7 +220,8 @@ class LiquiGoals_QueryHelper
 			':user_id' => $user_id
 		]));
 
-		return $query->fetchColumn(0) ?: 0;
+		$result_cache[$parameters_encoded] = (int)$query->fetchColumn(0) ?: 0;
+		return $result_cache[$parameters_encoded];
 	}
 
 	protected function applyEditFilters(array $filters, array &$joins, array &$wheres, array &$params)
@@ -213,8 +250,14 @@ class LiquiGoals_QueryHelper
 
 		if (isset($filters['namespace']))
 		{
-			$wheres[] = 'p.page_namespace = :namespace';
-			$params[':namespace'] = (int)$filters['namespace'];
+			$namespaces = (array)$filters['namespace'];
+			if (count($namespaces) == 1)
+			{
+				$wheres[] = 'p.page_namespace = :namespace';
+				$params[':namespace'] = (int)reset($namespaces);
+			}
+			else
+				$wheres[] = 'p.page_namespace IN (' . join(', ', array_map(function($namespace) { return (int)$namespace; }, $namespaces)) . ')';
 		}
 	}
 

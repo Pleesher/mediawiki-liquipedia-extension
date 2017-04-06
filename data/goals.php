@@ -227,13 +227,6 @@ return [
 		'category' => 'unconventional'
 	],
 
-	'massive_edit' => [
-		'checker' => function($goal, $user_id, array $context) {
-			return [$context['query_helper']->getUserMaxEditLength($user_id), 100000];
-		},
-		'category' => 'general',
-		'professions' => ['historian']
-	],
 	'pizza_master' => [
 		'checker' => function($goal, $user_id, array $context) {
 			return true;

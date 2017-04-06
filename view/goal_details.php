@@ -8,7 +8,7 @@
 <p><?php echo nl2br($goal->description) ?></p>
 <?php endif ?>
 
-<?php if (count($goal->professions) > 0): ?>
+<?php if (false && count($goal->professions) > 0): ?>
 <h2><?php echo $h->text('liquigoals.goal.associated_professions.title') ?></h2>
 <ul>
 	<?php foreach ($goal->professions as $profession_key => $profession): ?>

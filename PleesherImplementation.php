@@ -25,8 +25,10 @@ class LiquiGoals_PleesherImplementation extends PleesherImplementation
 
 	public function getLogger()
 	{
-		$logger = new \Monolog\Logger('debug');
-		$logger->pushHandler(new \Monolog\Handler\RotatingFileHandler(__DIR__ . '/logs/debug.log', \Monolog\Logger::DEBUG));
+		$logger = new \Monolog\Logger('liquigoals');
+		$logger->pushHandler(new \Monolog\Handler\RotatingFileHandler(__DIR__ . '/logs/debug.log', 0, \Monolog\Logger::DEBUG));
+		$logger->pushHandler(new \Monolog\Handler\RotatingFileHandler(__DIR__ . '/logs/warning.log', 0, \Monolog\Logger::WARNING));
+		$logger->pushHandler(new \Monolog\Handler\RotatingFileHandler(__DIR__ . '/logs/error.log', 0, \Monolog\Logger::ERROR));
 
 		return $logger;
 	}

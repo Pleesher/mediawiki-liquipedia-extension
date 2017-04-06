@@ -20,6 +20,9 @@
 			"i18n"
 		]
 	},
+	"ExtensionMessagesFiles": {
+		"LiquiGoalsAlias": "LiquiGoalsAlias.php"
+	},
 	
 	"AutoloadClasses": {
 		"LiquiGoals": "LiquiGoals.php",

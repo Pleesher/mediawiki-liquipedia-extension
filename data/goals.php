@@ -226,12 +226,4 @@ return [
 		},
 		'category' => 'unconventional'
 	],
-
-	'pizza_master' => [
-		'checker' => function($goal, $user_id, array $context) {
-			return true;
-		},
-		'category' => 'unconventional',
-		'professions' => ['historian', 'reporter']
-	],
 ];

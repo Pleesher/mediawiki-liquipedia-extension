@@ -1,5 +1,4 @@
 <?php
-// TODO: unDRY this up a bit more
 class LiquiGoals_QueryHelper
 {
 	protected $pdo;
@@ -20,34 +19,11 @@ class LiquiGoals_QueryHelper
 		$wheres = [];
 		$params = [];
 
-		if (isset($filters['namespace']))
-		{
-			$namespaces = (array)$filters['namespace'];
-			if (count($namespaces) == 1)
-			{
-				$wheres[] = 'p.page_namespace = :namespace';
-				$params[':namespace'] = (int)reset($namespaces);
-			}
-			else
-				$wheres[] = 'p.page_namespace IN (' . join(', ', array_map(function($namespace) { return (int)$namespace; }, $namespaces)) . ')';
-		}
-
-		if (isset($filters['page_title_regex']))
-		{
-			$wheres[] = 'p.page_title REGEXP :page_title_regex';
-			$params[':page_title_regex'] = $filters['page_title_regex'];
-		}
-
-		if (isset($filters['page_title_negative_regex']))
-		{
-			$wheres[] = 'p.page_title REGEXP :page_title_negative_regex = 0';
-			$params[':page_title_negative_regex'] = $filters['page_title_negative_regex'];
-		}
+		$this->applyEditFilters($filters, $joins, $wheres, $params);
 
 		$sql = '
 			SELECT COUNT(*)
-			FROM ' . $this->prefixTableName('revision') . ' r
-			JOIN ' . $this->prefixTableName('page') . ' p ON r.rev_page = p.page_id';
+			FROM ' . $this->prefixTableName('revision') . ' r';
 		if (count($joins) > 0)
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
@@ -146,12 +122,7 @@ class LiquiGoals_QueryHelper
 		$wheres = [];
 		$params = [];
 
-		if (isset($filters['category_title']))
-		{
-			$joins[]  = $this->prefixTableName('categorylinks') . ' cl ON cl.cl_type = \'page\' AND cl.cl_from = r.rev_page';
-			$wheres[] = 'cl.cl_to = :category_title';
-			$params[':category_title'] = $filters['category_title'];
-		}
+		$this->applyEditFilters($filters, $joins, $wheres, $params);
 
 		$sql = '
 			SELECT MAX(DATEDIFF(STR_TO_DATE(r.rev_timestamp, \'%Y%m%d%H%i%s\'), STR_TO_DATE(pr.rev_timestamp, \'%Y%m%d%H%i%s\'))) AS max_bump_days
@@ -226,8 +197,7 @@ class LiquiGoals_QueryHelper
 
 	protected function applyEditFilters(array $filters, array &$joins, array &$wheres, array &$params)
 	{
-		if (isset($filters['page_title_regex']) || isset($filters['namespace']))
-			$joins[] = $this->prefixTableName('page') . ' p ON r.rev_page = p.page_id';
+		$joins[] = $this->prefixTableName('page') . ' p ON r.rev_page = p.page_id';
 
 		if (isset($filters['category_title']))
 		{
@@ -248,6 +218,12 @@ class LiquiGoals_QueryHelper
 			$params[':page_title_regex'] = $filters['page_title_regex'];
 		}
 
+		if (isset($filters['page_title_negative_regex']))
+		{
+			$wheres[] = 'p.page_title REGEXP :page_title_negative_regex = 0';
+			$params[':page_title_negative_regex'] = $filters['page_title_negative_regex'];
+		}
+
 		if (isset($filters['namespace']))
 		{
 			$namespaces = (array)$filters['namespace'];
@@ -259,6 +235,12 @@ class LiquiGoals_QueryHelper
 			else
 				$wheres[] = 'p.page_namespace IN (' . join(', ', array_map(function($namespace) { return (int)$namespace; }, $namespaces)) . ')';
 		}
+
+		if (isset($filters['_where']))
+			$wheres[] = $filters['_where'];
+
+		if (isset($filters['_where_params']))
+			$params = array_merge($params, $filters['_where_params']);
 	}
 
 	protected function prefixTableName($name)

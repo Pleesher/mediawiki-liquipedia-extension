@@ -282,15 +282,26 @@
 	padding:5px; 
 	background-color:#f0f0f0;
 	margin-bottom: 10px;
-	> .pleesher-admin-block-title {
+	.pleesher-admin-block-title {
 		font-weight: bold;
+	}
+	.pleesher-admin-block-title-bad {
+		a {
+			color: #cc3333;
+		}
+	}
+	.pleesher-admin-block-title-good {
+		a {
+			color: #33aa33;
+		}
 	}
 }
 .pleesher-loading {
-	vertical-align: middle; 
+	vertical-align: bottom; 
 	background-image: url(./gfx/loading.gif); 
 	background-repeat: no-repeat;
-	padding-left: 30px;
+	background-position: left center;
+	padding-left: 22px;
 }
 #toast-container {
 	> .toast {

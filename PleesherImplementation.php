@@ -51,6 +51,10 @@ class LiquiGoals_PleesherImplementation extends PleesherImplementation
 
 	public function getUserPageData(User $user)
 	{
+		// Disabling professions for now
+
+		return parent::getUserPageData($user);
+
 		$user_professions = array_map(function($user_profession) use($user) {
 			$user_profession->level = LiquiGoals::getUserLevelForProfession($user, $user_profession->key);
 			$user_profession->kudos = LiquiGoals::getUserKudosForProfession($user, $user_profession->key);

@@ -1,5 +1,5 @@
 <?php
-class LiquiGoals_ProfessionListPage extends SpecialPage
+class LiquiGoals_ProfessionListPage extends Pleesher_SpecialPage
 {
 	public function __construct()
 	{

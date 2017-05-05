@@ -58,7 +58,7 @@ class LiquiGoals
 
 	public static function viewUserKudos($input, array $args, Parser $parser, PPFrame $frame)
 	{
-		$username = $args['user'];
+		$user_name = $args['user'];
 		$user_id = User::idFromName($username);
 
 		if ($user_id == 0)
@@ -72,13 +72,13 @@ class LiquiGoals
 		if (isset($args['profession']))
 			return self::getUserKudosForProfession($user, $args['profession']);
 
-		$pleesher_user = PleesherExtension::$pleesher->getUser($user_id);
+		$pleesher_user = PleesherExtension::$pleesher->getUser($user_name);
 		return $pleesher_user->kudos;
 	}
 
 	public static function viewUserLevel($input, array $args, Parser $parser, PPFrame $frame)
 	{
-		$username = $args['user'];
+		$user_name = $args['user'];
 		$user_id = User::idFromName($username);
 
 		if ($user_id == 0)
@@ -88,7 +88,10 @@ class LiquiGoals
 		}
 
 		if (isset($args['profession']))
-			return self::getUserLevelForProfession($user_id, $args['profession']);
+		{
+			$user = User::newFromId($user_id);
+			return self::getUserLevelForProfession($user, $args['profession']);
+		}
 
 		// TODO: no level without profession yet
 		return 0;

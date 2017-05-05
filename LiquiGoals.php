@@ -36,16 +36,16 @@ class LiquiGoals
 		{
 			if ($out->getTitle()->getText() == 'RecheckAllMyAchievements')
 			{
-				PleesherExtension::$pleesher->revoke($GLOBALS['wgUser']->getId(), array_keys(PleesherExtension::$goal_data));
-				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getId());
+				PleesherExtension::$pleesher->revoke($GLOBALS['wgUser']->getName(), array_keys(PleesherExtension::$goal_data));
+				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getName());
 			}
 			else if ($out->getTitle()->getText() == 'RecheckAllUserAchievements')
 			{
 				foreach (PleesherExtension::getUsers() as $user)
-					PleesherExtension::$pleesher->checkAchievements($user->getId());
+					PleesherExtension::$pleesher->checkAchievements($user->getName());
 			}
 			else if ($out->getTitle()->getText() == 'CreateAccount' && $out->getTitle()->getNamespace() == NS_SPECIAL)
-				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getId());
+				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getName());
 		}
 	}
 
@@ -101,7 +101,7 @@ class LiquiGoals
 	{
 		$kudos = 0;
 
-		$goals = PleesherExtension::getAchievements($user->getId());
+		$goals = PleesherExtension::getAchievements($user->getName());
 		foreach ($goals as $goal)
 		{
 			if (in_array($profession_key, array_keys($goal->professions)))

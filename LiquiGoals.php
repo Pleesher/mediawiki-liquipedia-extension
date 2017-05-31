@@ -36,16 +36,16 @@ class LiquiGoals
 		{
 			if ($out->getTitle()->getText() == 'RecheckAllMyAchievements')
 			{
-				PleesherExtension::$pleesher->revoke($GLOBALS['wgUser']->getId(), array_keys(PleesherExtension::$goal_data));
-				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getId());
+				PleesherExtension::$pleesher->revoke($GLOBALS['wgUser']->getName(), array_keys(PleesherExtension::$goal_data));
+				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getName());
 			}
 			else if ($out->getTitle()->getText() == 'RecheckAllUserAchievements')
 			{
 				foreach (PleesherExtension::getUsers() as $user)
-					PleesherExtension::$pleesher->checkAchievements($user->getId());
+					PleesherExtension::$pleesher->checkAchievements($user->getName());
 			}
 			else if ($out->getTitle()->getText() == 'CreateAccount' && $out->getTitle()->getNamespace() == NS_SPECIAL)
-				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getId());
+				PleesherExtension::$pleesher->checkAchievements($GLOBALS['wgUser']->getName());
 		}
 	}
 
@@ -58,7 +58,7 @@ class LiquiGoals
 
 	public static function viewUserKudos($input, array $args, Parser $parser, PPFrame $frame)
 	{
-		$username = $args['user'];
+		$user_name = $args['user'];
 		$user_id = User::idFromName($username);
 
 		if ($user_id == 0)
@@ -72,13 +72,13 @@ class LiquiGoals
 		if (isset($args['profession']))
 			return self::getUserKudosForProfession($user, $args['profession']);
 
-		$pleesher_user = PleesherExtension::$pleesher->getUser($user_id);
+		$pleesher_user = PleesherExtension::$pleesher->getUser($user_name);
 		return $pleesher_user->kudos;
 	}
 
 	public static function viewUserLevel($input, array $args, Parser $parser, PPFrame $frame)
 	{
-		$username = $args['user'];
+		$user_name = $args['user'];
 		$user_id = User::idFromName($username);
 
 		if ($user_id == 0)
@@ -88,7 +88,10 @@ class LiquiGoals
 		}
 
 		if (isset($args['profession']))
-			return self::getUserLevelForProfession($user_id, $args['profession']);
+		{
+			$user = User::newFromId($user_id);
+			return self::getUserLevelForProfession($user, $args['profession']);
+		}
 
 		// TODO: no level without profession yet
 		return 0;
@@ -98,7 +101,7 @@ class LiquiGoals
 	{
 		$kudos = 0;
 
-		$goals = PleesherExtension::getAchievements($user->getId());
+		$goals = PleesherExtension::getAchievements($user->getName());
 		foreach ($goals as $goal)
 		{
 			if (in_array($profession_key, array_keys($goal->professions)))

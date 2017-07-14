@@ -41,5 +41,5 @@
 		<?php endforeach ?>
 	<?php endif ?>
 
-	<?php echo PleesherExtension::render('_pleesher_ad.wiki') ?>
+	<?php echo PleesherExtension::render('_pleesher_ad') ?>
 </div>

@@ -28,7 +28,8 @@ class LiquiGoals_QueryHelper
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
 			WHERE r.rev_user = :user_id
-			AND   r.rev_parent_id = 0';
+			AND   r.rev_parent_id = 0
+			AND   r.rev_deleted = 0';
 		if (count($wheres) > 0)
 			$sql .= ' AND ' . join(' AND ', $wheres);
 
@@ -61,7 +62,8 @@ class LiquiGoals_QueryHelper
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
 			WHERE r.rev_user = :user_id
-			AND r.rev_parent_id <> 0';
+			AND   r.rev_parent_id <> 0
+			AND   r.rev_deleted = 0';
 		if (count($wheres) > 0)
 			$sql .= ' AND ' . join(' AND ', $wheres);
 
@@ -96,7 +98,8 @@ class LiquiGoals_QueryHelper
 		if (count($joins) > 0)
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
-			WHERE r.rev_user = :user_id';
+			WHERE r.rev_user = :user_id
+			AND   r.rev_deleted = 0';
 		if (count($wheres) > 0)
 			$sql .= ' AND ' . join(' AND ', $wheres);
 		$sql .= '
@@ -131,7 +134,8 @@ class LiquiGoals_QueryHelper
 		if (count($joins) > 0)
 			$sql .= ' JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
-			WHERE r.rev_user = :user_id';
+			WHERE r.rev_user = :user_id
+			AND   r.rev_deleted = 0';
 		if (count($wheres) > 0)
 			$sql .= ' AND ' . join(' AND ', $wheres);
 		$sql .= '
@@ -172,7 +176,8 @@ class LiquiGoals_QueryHelper
 					JOIN ' . join(' JOIN ', $joins);
 		$sql .= '
 					WHERE r.rev_user = :user_id
-					AND   r.rev_parent_id <> 0';
+					AND   r.rev_parent_id <> 0
+					AND   r.rev_deleted = 0';
 		if (count($wheres) > 0)
 			$sql .= '
 					AND ' . join(' AND ', $wheres);

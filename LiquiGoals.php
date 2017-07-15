@@ -3,9 +3,6 @@ use Pleesher\Client\Client;
 
 class LiquiGoals
 {
-	/**
-	 * @var \Pleesher\Client\Client
-	 */
 	public static $professions;
 
 	public static function getConfigValue($key, $default = null)
@@ -59,11 +56,11 @@ class LiquiGoals
 	public static function viewUserKudos($input, array $args, Parser $parser, PPFrame $frame)
 	{
 		$user_name = $args['user'];
-		$user_id = User::idFromName($username);
+		$user_id = User::idFromName($user_name);
 
 		if ($user_id == 0)
 		{
-			PleesherExtension::$pleesher->logger->error(sprintf('No such wiki user: %s (%s)', $username, $_SERVER['REQUEST_URI']));
+			PleesherExtension::$pleesher->logger->error(sprintf('No such wiki user: %s (%s)', $user_name, $_SERVER['REQUEST_URI']));
 			return 0;
 		}
 
@@ -79,11 +76,11 @@ class LiquiGoals
 	public static function viewUserLevel($input, array $args, Parser $parser, PPFrame $frame)
 	{
 		$user_name = $args['user'];
-		$user_id = User::idFromName($username);
+		$user_id = User::idFromName($user_name);
 
 		if ($user_id == 0)
 		{
-			PleesherExtension::$pleesher->logger->error(sprintf('No such wiki user: %s (%s)', $username, $_SERVER['REQUEST_URI']));
+			PleesherExtension::$pleesher->logger->error(sprintf('No such wiki user: %s (%s)', $user_name, $_SERVER['REQUEST_URI']));
 			return 0;
 		}
 

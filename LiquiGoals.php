@@ -1,6 +1,4 @@
 <?php
-use Pleesher\Client\Client;
-
 class LiquiGoals
 {
 	public static $professions;

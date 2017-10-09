@@ -15,7 +15,7 @@
 	--></div>
 	<?php if ($showcased_achievement_count > 0): ?>
 	<div class="pleesher-liquigoals-title">Achievement Showcase</div>
-	<Showcase user="<?php echo $user->getName() ?>" />
+	<?php echo PleesherExtension::viewShowcase(null, ['user' => $user->getName()], null, null); ?>
 	<?php endif ?>
 	<?php if (false && count($user_professions) > 0): ?>
 		<div class="pleesher-liquigoals-title">Professions</div>
@@ -32,14 +32,14 @@
 		</div>
 	<?php endif ?>
 	<div class="pleesher-liquigoals-title">Completed Achievements</div>
-	<AchievementList user="<?php echo $user->getName() ?>" />
+	<?php echo PleesherExtension::viewAchievements(null, ['user' => $user->getName()], null, null); ?>
 
 	<?php if (count($closest_achievements) > 0): ?>
 		<div class="pleesher-liquigoals-title">Achievements In Progress</div>
 		<?php foreach ($closest_achievements as $goal): ?>
-			<Goal code="<?php echo $goal->code ?>" perspective="<?php echo $user->getName() ?>" />
+			<?php echo PleesherExtension::viewGoal(null, ['code' => $goal->code, 'perspective' => $user->getName()], null, null); ?>
 		<?php endforeach ?>
 	<?php endif ?>
 
-	<?php echo PleesherExtension::render('_pleesher_ad.wiki') ?>
+	<?php echo PleesherExtension::render('_pleesher_ad') ?>
 </div>

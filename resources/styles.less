@@ -1,6 +1,5 @@
-@pleesher-border-radius:20px;
-@pleesher-achievement-bar-bg-earned:#d9e8f3;
-@pleesher-achievement-bar-bg-unearned:#e4e4e4;
+@pleesher-achievement-bar-bg-earned:#dddddd;
+@pleesher-achievement-bar-bg-unearned:#eeeeee;
 @pleesher-progress-front:#2d5f93;
 @pleesher-progress-back:#969696;
 @pleesher-showcase-bg:#d9e8f3;
@@ -11,6 +10,7 @@
 @pleesher-border-color:#dddddd;
 @pleesher-progress-inner-color:#ffffff;
 @pleesher-showcase-remove-border:#2d5f93;
+@pleesher-logo-border-color:#000000;
 
 .pleesher-progress {
 	vertical-align:middle;
@@ -51,7 +51,7 @@
 .pleesher-kudos {
 	text-align:center;
 	line-height:1;
-	margin-top:10px;
+	margin-top:-5px;
 	margin-bottom:2.5em;
 	> .pleesher-kudos-big {
 		font-size:2.5em;
@@ -137,8 +137,7 @@
 	}
 }
 .pleesher-goal {
-	border-radius:@pleesher-border-radius;
-	padding:0 15px 10px;
+	padding:15px 15px 10px;
 	margin-bottom:15px;
 	&.pleesher-goal-earned {
 		background-color:@pleesher-achievement-bar-bg-earned;
@@ -198,6 +197,7 @@
 		background-position:center center;
 		background-repeat:no-repeat;
 		margin-right:5px;
+		border:2px solid @pleesher-logo-border-color;
 	}
 	.pleesher-checkmark {
 		background-image:url(./gfx/checkmark.png);
@@ -209,7 +209,7 @@
 		margin-left:5px;
 	}
 	.pleesher-achievement {
-		margin-top:5px;
+		margin-top:-8px;
 		.pleesher-achievement-title {
 			font-size:1.5em;
 			font-weight:bold;

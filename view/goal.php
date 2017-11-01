@@ -9,7 +9,7 @@
 			<div class="pleesher-cell pleesher-cell-main">
 				<div class="pleesher-achievement"><!--
 					--><div class="pleesher-achievement-title"><!--
-						--><a href="<?php echo $h->pageUrl('Special:AchievementDetails/' . $goal->code) ?>"><?php echo htmlspecialchars($goal->title) ?></a><!--
+						--><a href="<?php echo $h->pageUrl('Special:AchievementDetails/' . $h->slugifyUrlId($goal->id, $goal->title)) ?>"><?php echo htmlspecialchars($goal->title) ?></a><!--
 						--><?php if (!empty($goal->achieved)): ?><!--
 							--><div class="pleesher-checkmark"></div><!--
 						--><?php endif ?><!--

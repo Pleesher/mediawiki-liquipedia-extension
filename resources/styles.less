@@ -133,6 +133,7 @@
 				margin-right:-4px;
 				margin-top:-4px;
 			}
+			.pleesherBackgroundImages();
 		}
 	}
 }
@@ -198,6 +199,7 @@
 		background-repeat:no-repeat;
 		margin-right:5px;
 		border:2px solid @pleesher-logo-border-color;
+		.pleesherBackgroundImages();
 	}
 	.pleesher-checkmark {
 		background-image:url(./gfx/checkmark.png);
@@ -337,5 +339,50 @@
 	}
 	> .toast-success {
 		background-position:13px center;
+	}
+}
+
+// actual images for achievements
+.pleesherBackgroundImages() {
+	.pleesherBackgroundImage(5-year-contract);
+	.pleesherBackgroundImage(been-a-team-for-a-while);
+	.pleesherBackgroundImage(biographer);
+	.pleesherBackgroundImage(clearing-up-some-dust);
+	.pleesherBackgroundImage(coding-why-yes-i-dabble);
+	.pleesherBackgroundImage(coming-around-the-codebase);
+	.pleesherBackgroundImage(crazy-stalker-ex);
+	.pleesherBackgroundImage(creating-the-building-blocks);
+	.pleesherBackgroundImage(devoted-fan);
+	.pleesherBackgroundImage(exploring-new-lands);
+	.pleesherBackgroundImage(filling-the-blanks);
+	.pleesherBackgroundImage(finding-the-news);
+	.pleesherBackgroundImage(forming-the-wiki);
+	.pleesherBackgroundImage(glorious-template-wizard);
+	.pleesherBackgroundImage(have-you-seen-this-new-thing-yet);
+	.pleesherBackgroundImage(its-a-start);
+	.pleesherBackgroundImage(leaving-your-mark);
+	.pleesherBackgroundImage(little-comeback);
+	.pleesherBackgroundImage(make-edits-7-days-in-a-row);
+	.pleesherBackgroundImage(moving-around);
+	.pleesherBackgroundImage(mr-template-inventor);
+	.pleesherBackgroundImage(narrator);
+	.pleesherBackgroundImage(never-sleeping);
+	.pleesherBackgroundImage(no-one-was-here-in-forever);
+	.pleesherBackgroundImage(on-the-path-to-glory);
+	.pleesherBackgroundImage(putting-all-the-transfers);
+	.pleesherBackgroundImage(random-stack);
+	.pleesherBackgroundImage(regular);
+	.pleesherBackgroundImage(teamed-up-forever-aka-the-hasuobs);
+	.pleesherBackgroundImage(the-big-switcheroo);
+	.pleesherBackgroundImage(these-are-the-first-steps);
+	.pleesherBackgroundImage(transfer-leaker);
+	.pleesherBackgroundImage(we-had-all-these-pages);
+	.pleesherBackgroundImage(well-that-was-antique);
+	.pleesherBackgroundImage(wiki-guru);
+	.pleesherBackgroundImage(wiki-setup-master);
+}
+.pleesherBackgroundImage(@imagename) {
+	&.pleesher-item-image_@{imagename} {
+		background-image:~"url(./gfx/achievementimages/@{imagename}.png)";
 	}
 }

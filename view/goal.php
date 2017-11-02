@@ -4,7 +4,7 @@
 	<div class="pleesher-table">
 		<div class="pleesher-row">
 			<div class="pleesher-cell pleesher-cell-logo">
-				<div class="pleesher-liquipedia-logo pleesher-item-image-<?php echo $goal->id; ?> wiki-backgroundcolor-dark"></div>
+				<div class="pleesher-liquipedia-logo pleesher-item-image_<?php echo str_replace(' ', '-', trim(preg_filter('/[^a-z0-9 ]/', '', strtolower($goal->title)))) ?> wiki-backgroundcolor-dark"></div>
 			</div>
 			<div class="pleesher-cell pleesher-cell-main">
 				<div class="pleesher-achievement"><!--

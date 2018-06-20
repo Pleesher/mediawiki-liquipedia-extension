@@ -11,17 +11,17 @@ return [
 	],
 	'content_creator_silver' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserPageCreationCount(User::idFromName($user_name), ['_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 10];
+			return [$context['query_helper']->getUserPageCreationCount(User::idFromName($user_name), ['_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 25];
 		}
 	],
 	'content_creator_gold' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserPageCreationCount(User::idFromName($user_name), ['_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 100];
+			return [$context['query_helper']->getUserPageCreationCount(User::idFromName($user_name), ['_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 500];
 		}
 	],
 	'content_creator_diamond' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserPageCreationCount(User::idFromName($user_name), ['_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 1000];
+			return [$context['query_helper']->getUserPageCreationCount(User::idFromName($user_name), ['_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 10000];
 		}
 	],
 
@@ -48,85 +48,85 @@ return [
 
 	'player_contributor_bronze' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return $context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Players', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]) >= 1;
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Players', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 5];
 		}
 	],
 	'player_contributor_silver' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Players', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 50];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Players', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 80];
 		}
 	],
 	'player_contributor_gold' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Players', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 2500];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Players', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 2000];
 		}
 	],
 	'player_contributor_diamond' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Players', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 100000];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Players', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 50000];
 		}
 	],
 
 	'team_contributor_bronze' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return $context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Teams', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]) >= 1;
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Teams', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 5];
 		}
 	],
 	'team_contributor_silver' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Teams', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 50];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Teams', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 80];
 		}
 	],
 	'team_contributor_gold' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Teams', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 2500];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Teams', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 2000];
 		}
 	],
 	'team_contributor_diamond' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Teams', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 100000];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['category_title' => 'Teams', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 50000];
 		}
 	],
 
 	'transfer_contributor_bronze' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return $context['query_helper']->getUserEditCount(User::idFromName($user_name), ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]) >= 1;
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 5];
 		}
 	],
 	'transfer_contributor_silver' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name),  ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 50];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name),  ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 80];
 		}
 	],
 	'transfer_contributor_gold' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name),  ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 2500];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name),  ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 2000];
 		}
 	],
 	'transfer_contributor_diamond' => [
 		'checker' => function($goal, $user_name, array $context) use($_main_namespaces_filter, $_main_namespaces_filter_params) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name),  ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 100000];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name),  ['page_title_regex' => '([[:<:]]|_|^)[tT]ransfers?([[:>:]]|_|$)', '_where' => $_main_namespaces_filter, '_where_params' => $_main_namespaces_filter_params]), 50000];
 		}
 	],
 
 	'template_contributor_bronze' => [
 		'checker' => function($goal, $user_name, array $context) {
-			return $context['query_helper']->getUserEditCount(User::idFromName($user_name), ['namespace' => NS_TEMPLATE]) >= 1;
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['namespace' => NS_TEMPLATE]), 5];
 		}
 	],
 	'template_contributor_silver' => [
 		'checker' => function($goal, $user_name, array $context) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['namespace' => NS_TEMPLATE]), 50];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['namespace' => NS_TEMPLATE]), 80];
 		}
 	],
 	'template_contributor_gold' => [
 		'checker' => function($goal, $user_name, array $context) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['namespace' => NS_TEMPLATE]), 2500];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['namespace' => NS_TEMPLATE]), 2000];
 		}
 	],
 	'template_contributor_diamond' => [
 		'checker' => function($goal, $user_name, array $context) {
-			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['namespace' => NS_TEMPLATE]), 100000];
+			return [$context['query_helper']->getUserEditCount(User::idFromName($user_name), ['namespace' => NS_TEMPLATE]), 50000];
 		}
 	],
 

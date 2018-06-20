@@ -1,6 +1,6 @@
 {
 	"name": "LiquiGoals",
-	"version": "1.0",
+	"version": "1.1.0",
 	"author": [
 		"Jérémy Touati"
 	],
@@ -9,8 +9,10 @@
 	"license-name": "MIT",
 	"type": "pleesher",
 	"requires": {
-		"MediaWiki": ">= 1.25.0",
-		"Pleesher": ">= 0.9"
+		"MediaWiki": ">=1.25.0",
+		"extensions": {
+			"Pleesher": ">=1.1.0"
+		}
 	},
 	
 	"callback": "LiquiGoals::initialize",
